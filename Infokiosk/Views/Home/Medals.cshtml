@@ -1,0 +1,34 @@
+﻿@model List<Infokiosk.Models.Exhibit>
+<div class="row" id="list">
+    @foreach (var exh in Model)
+    {
+        <div class="item">
+            <div class="col-sm-2">
+                <div class="thumbnail item-card">
+                    <img src="~/Content/Media/1.jpg" alt="...">
+                    <div class="caption">
+                        <a href="/Home/Description/@exh.Id">
+                            <h3 class="text-center">@exh.Name</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts{
+    <script>
+
+        let cards = document.getElementsByClassName('item-card');
+        let maxHeight = Math.max.apply(Math,
+            Array.prototype.map.call(cards,
+                x => {
+                    return x.offsetHeight;
+                }));
+
+        Array.prototype.forEach.call(cards,
+            x => {
+                x.style.height = maxHeight + 'px';
+            });
+    </script>
+}

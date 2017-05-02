@@ -1,0 +1,43 @@
+﻿@*@model List<Infokiosk.Models.Achievement>*@
+@model Infokiosk.Models.EventViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="col-sm-6">
+    <h1 class="text-center">@Model.Event.Name</h1>
+    <div class="row">
+
+        @foreach (var achievement in Model.Achievements)
+            {
+
+                var message = achievement.Athlete.Initials + " - " + achievement.Prize.Name;
+                if (!achievement.KindOfSport.IsEmpty())
+                {
+                    message += " - " + achievement.KindOfSport;
+                }
+                <p>@message</p>
+        }
+    </div>
+
+</div>
+
+
+<div class="col-sm-6">
+    <div class=" row">
+        @foreach (var athlete in Model.Athletes)
+        {
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="~/Content/Media/1.jpg" alt="...">
+                    <div class="caption">
+                        <a href="#">
+                            <h2 class="text-center">@athlete.Initials</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

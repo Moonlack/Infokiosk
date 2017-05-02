@@ -1,0 +1,66 @@
+﻿@model List<Infokiosk.Models.Event>
+@{
+    ViewBag.Title = "OlympicGames";
+}
+
+@{
+    var summer = Model.Where(x => x.Category == "Summer Olympic Games");
+    var winter = Model.Where(x => x.Category == "Winter Olympic Games");
+}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Зимние Олимпийские игры</h1>
+        <div class="row">
+            @foreach (var game in winter)
+            {
+                <div class="col-sm-4">
+                    <div class="thumbnail">
+                        <img src="~/Content/Media/1.jpg" alt="...">
+                        <div class="caption">
+                            <a href="/Home/Description/@game.Id">
+                                <h3 class="text-center">@game.Name</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Летние Олимпийские игры</h1>
+        <div class="row">
+            @foreach (var game in summer)
+            {
+                <div class="col-sm-4">
+                    <div class="thumbnail">
+                        <img src="~/Content/Media/1.jpg" alt="...">
+                        <div class="caption">
+                            <a href="/Home/Description/@game.Id">
+                                <h3 class="text-center">@game.Name</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+
+        let cards = document.getElementsByClassName('item-card');
+        let maxHeight = Math.max.apply(Math,
+            Array.prototype.map.call(cards,
+                x => {
+                    return x.offsetHeight;
+                }));
+
+        Array.prototype.forEach.call(cards,
+            x => {
+                x.style.height = maxHeight + 'px';
+            });
+    </script>
+}
