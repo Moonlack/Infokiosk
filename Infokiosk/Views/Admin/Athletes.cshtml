@@ -1,0 +1,93 @@
+﻿@model Infokiosk.Models.AdminAthletesViewModel
+@{
+    ViewBag.Title = "Athletes";
+    Layout = "~/Views/Admin/AdminLayout.cshtml";
+}
+
+<h2>Athletes</h2>
+
+<div class="col-sm-6">
+    <h2>Добавление спортсмена</h2>
+    <form method="post" class="form-horizontal" role="form" action="/Admin/AddAthlete">
+        <div class="form-group">
+            <label for="Name" class="col-md-3 control-label">ФИО:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Initials" value="@Model.Athlete.Initials" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Category" class="col-md-3 control-label">Изображения:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Category" value="@Model.Athlete.Images" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-success" value="Добавить" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-6">
+    <h2>Форма изменения спортсмена</h2>
+
+    <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeAthlete">
+        <div class="form-group">
+            <label for="Id" class="col-md-3 control-label">Спортсмен:</label>
+            <div class="col-xs-6">
+                <select class="selectpicker form-control" name="Id">
+                    @foreach (var m in Model.Athletes)
+                    {
+                        <option value="@m.Id">@m.Initials</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Name" class="col-md-3 control-label">ФИО:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Name" value="@Model.Athlete.Initials" class="form-control" title="asd" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Category" class="col-md-3 control-label">Изображения:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Category" value="@Model.Athlete.Images" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-default" value="Отправить" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-6">
+    <h2>Удаление спортсмена</h2>
+    <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteAthlete">
+        <div class="form-group">
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите спортсмен</option>
+                @foreach (var x in @Model.Athletes)
+            {
+                    <option value="@x.Id">@x.Initials</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-danger" value="Удалить" />
+            </div>
+        </div>
+    </form>
+</div>

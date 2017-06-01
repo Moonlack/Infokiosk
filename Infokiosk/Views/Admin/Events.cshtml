@@ -1,0 +1,125 @@
+﻿@model Infokiosk.Models.AdminEventsViewModel
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Admin/AdminLayout.cshtml";
+}
+
+<h2>Events</h2>
+
+<div class="col-sm-6">
+    <h2>Добавление события</h2>
+    <form method="post" class="form-horizontal" role="form"action="AddEvent">
+        <div class="form-group">
+            <label for="Name" class="col-md-3 control-label">Название:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Name" value="@Model.Event.Name" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Category" class="col-md-3 control-label">Категория события:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Category" value="@Model.Event.Category" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Description" class="col-md-3 control-label">Описание:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Description" value="@Model.Event.Description" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Images" class="col-md-3 control-label">Изображения:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Images" value="@Model.Event.Images" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-success" value="Добавить" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-6">
+    <h2>Форма изменения события</h2>
+
+    <form method="post" class="form-horizontal" role="form" asp-controller="Admin" asp-action="ChangeEvent">
+        <div class="form-group">
+            <label for="Id" class="col-md-3 control-label">Событие:</label>
+            <div class="col-xs-6">
+                <select class="selectpicker form-control" name="Id">
+                    @foreach (var m in Model.Events)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Name" class="col-md-3 control-label">Название:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Name" value="@Model.Event.Name" class="form-control" title="asd"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Category" class="col-md-3 control-label">Категория события:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Category" value="@Model.Event.Category" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Description" class="col-md-3 control-label">Описание:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Description" value="@Model.Event.Description" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Images" class="col-md-3 control-label">Изображения:</label>
+            <div class="col-xs-6">
+                <div class="input-group">
+                    <input type="text" name="Images" value="@Model.Event.Images" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-default" value="Отправить" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-6">
+    <h2>Удаление события</h2>
+    <form method="get" class="form-horizontal" role="form"asp-controller="Admin" asp-action="DeleteEvent">
+        <div class="form-group">
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите событие</option>
+                @foreach (var x in @Model.Events)
+            {
+                    <option value="@x.Id">@x.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-danger" value="Удалить" />
+            </div>
+        </div>
+    </form>
+</div>

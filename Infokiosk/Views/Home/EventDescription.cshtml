@@ -1,0 +1,55 @@
+﻿@model Infokiosk.Models.EventViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="col-sm-6">
+    <h2 class="text-center">@Model.Event.Name</h2>
+    <div class="row">
+        @try
+        {
+            foreach (var achievement in Model.Achievements)
+            {
+
+                var message = achievement.Athlete.Initials + " - " + achievement.Prize.Name;
+                if (!achievement.KindOfSport.IsEmpty())
+                {
+                    message += " - " + achievement.KindOfSport;
+                }
+                <p>@message</p>
+            }
+        }
+        catch (Exception e) { }
+
+    </div>
+</div>
+
+
+<div class="col-sm-6">
+    <h2 class="text-center">Призеры</h2>
+    <div class=" row">
+        @try
+        {
+            foreach (var athlete in Model.Athletes)
+            {
+                <div class="col-lg-4 col-md-6 ">
+                    <a href="/Home/AthleteDescription/@athlete.Id">
+                        <div class="thumbnail item-card">
+                            @*@{var path = athlete.Images +"\\Folder.jpg"}*@
+                            <img src="~/Content/Media/1.jpg" alt="...">
+                            <div class="caption">
+
+                                <h3 class="text-center">@athlete.Initials</h3>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        catch (Exception e) { }
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Scripts/CardScript.js"></script>

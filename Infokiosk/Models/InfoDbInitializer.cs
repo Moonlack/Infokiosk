@@ -24,17 +24,17 @@ namespace Infokiosk.Models
             var athl5 = new Athlete { Initials = "Роман Петрушенко" };
             var athl6 = new Athlete { Initials = "Андрей Арямнов" };
 
-            var ev2 = new Event { Name = "Лондон 2012", Category = "Summer Olympic Games" };
-            var ev1 = (new Event { Name = "Пекин 2008", Category = "Summer Olympic Games" });
-            var ev3 = (new Event { Name = "Атланта 1996", Category = "Summer Olympic Games" });
-            var ev4 = (new Event { Name = "Сидней 2000", Category = "Summer Olympic Games" });
-            var ev5 = (new Event { Name = "Афины 2004", Category = "Summer Olympic Games" });
+            var ev2 = new Event { Name = "Лондон 2012", Category = "Summer Olympic Games", Images = @"/Content/Media/OlympicGames/London 2012" };
+            var ev1 = (new Event { Name = "Пекин 2008", Category = "Summer Olympic Games", Images = @"/Content/Media/OlympicGames/Beijing 2008" });
+            var ev3 = (new Event { Name = "Атланта 1996", Category = "Summer Olympic Games", Images = @"/Content/Media/OlympicGames/Atlanta 1996" });
+            var ev4 = (new Event { Name = "Сидней 2000", Category = "Summer Olympic Games", Images = @"/Content/Media/OlympicGames/Sydney 2000" });
+            var ev5 = (new Event { Name = "Афины 2004", Category = "Summer Olympic Games", Images = @"/Content/Media/OlympicGames/Afiny 2004" });
 
-            var ev6 = (new Event { Name = "Нагано 1998", Category = "Winter Olympic Games" });
-            var ev7 = (new Event { Name = "Лиллехаммер 1994", Category = "Winter Olympic Games" });
-            var ev8 = (new Event { Name = "Турин 2006", Category = "Winter Olympic Games" });
-            var ev9 = (new Event { Name = "Ванкувер 2010", Category = "Winter Olympic Games" });
-            var ev10 = (new Event { Name = "Солт-Лейк-сити 2002", Category = "Winter Olympic Games" });
+            var ev6 = (new Event { Name = "Нагано 1998", Category = "Winter Olympic Games", Images = @"/Content/Media/OlympicGames/Nagano 1998" });
+            var ev7 = (new Event { Name = "Лиллехаммер 1994", Category = "Winter Olympic Games", Images = @"/Content/Media/OlympicGames/Lillehammer 1994" });
+            var ev8 = (new Event { Name = "Турин 2006", Category = "Winter Olympic Games", Images = @"/Content/Media/OlympicGames/Torino 2006" });
+            var ev9 = (new Event { Name = "Ванкувер 2010", Category = "Winter Olympic Games", Images = @"/Content/Media/OlympicGames/Vancouver 2010" });
+            var ev10 = (new Event { Name = "Солт-Лейк-сити 2002", Category = "Winter Olympic Games", Images = @"/Content/Media/OlympicGames/Salt-Lake-Sity 2002" });
 
             var ach1 = new Achievement { Athlete = athl1, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
             var ach2 = new Achievement { Athlete = athl1, Event = ev1, Prize = pr3, KindOfSport = "Гребля на байдарках и каноэ, байдарка-двойка" };
@@ -81,6 +81,36 @@ namespace Infokiosk.Models
             var ks13 = new KindOfSport { Name = "Фехтование" };
             var ks14 = new KindOfSport { Name = "Настольный тенис" };
 
+
+            var c1 = new SportsFacilityCategory { Name = "Многофункциональные культурно-спортивные комплексы" };
+            var c2 = new SportsFacilityCategory { Name = "Гребные каналы" };
+            var c3 = new SportsFacilityCategory { Name = "Ледовые дворцы" };
+            var c4 = new SportsFacilityCategory { Name = "Другие спортивные сооружения" };
+
+            //var sf1 = new SportsFacility { Name = "МКСК Минск-арена", Category = c1 };
+            //var sf2 = new SportsFacility { Name = "МКСК Бобруйск-арена", Category = c1 };
+            //var sf3 = new SportsFacility { Name = "Ледовый дворец спорта в Барановичах", Category = c3};
+            //var sf4 = new SportsFacility { Name = "Ледовый дворец спорта в Гродно", Category = c3 };
+            //var sf5 = new SportsFacility { Name = "Ледовая арена в Пружанах", Category = c3};
+            //var sf6 = new SportsFacility { Name = "Гребной канал в Бресте", Category = c2 };
+            //var sf7 = new SportsFacility { Name = "РЦОП по гребным видам спорта в Заславле", Category = c2};
+            //var sf8 = new SportsFacility { Name = "РЦОП по теннису в Минске", Category = c4 };
+            //var sf9 = new SportsFacility { Name = "Олимпийский спортивный комлекс \"Стайки\"", Category = c4 };
+            //var sf10 = new SportsFacility { Name ="", Category = ,Images = ""};
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf10 = new SportsFacility { Name = "", Category = , Images = "" };
+            //var sf20 = new SportsFacility { Name = "", Category = , Images = "" };
+
+            db.SportsFacilityCategories.AddRange(new List<SportsFacilityCategory> { c1, c2, c3, c4 });
+            //db.SportsFacilities.AddRange(new List<SportsFacility> { sf1, sf2, sf3, sf4, sf5, sf6, sf7, sf8, sf9 });
+
             db.Prizes.AddRange(new List<Prize> { pr1, pr2, pr3, pr4 });
             db.Athletes.AddRange(new List<Athlete> { athl1, athl2, athl3, athl4, athl5, athl6 });
             db.Events.AddRange(new List<Event> { ev1, ev2, ev3, ev4, ev5, ev6, ev7, ev8, ev9, ev10 });
@@ -108,8 +138,6 @@ namespace Infokiosk.Models
                 ex19
             });
             db.KindsOfSports.AddRange(new List<KindOfSport> { ks1, ks2, ks3, ks4, ks5, ks6, ks7, ks8, ks9, ks10, ks11, ks12, ks13, ks14 });
-
-
 
             db.SaveChanges();
         }

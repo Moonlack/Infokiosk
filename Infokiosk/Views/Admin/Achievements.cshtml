@@ -1,0 +1,138 @@
+﻿@model Infokiosk.Models.AdminAchievementsViewModel
+@{
+    ViewBag.Title = "Achievements";
+    Layout = "~/Views/Admin/AdminLayout.cshtml";
+}
+
+<h2>Achievements</h2>
+
+<div class="col-sm-6">
+    <h2>Добавление достижения</h2>
+    <form method="post" class="form-horizontal" role="form" action="/Admin/AddAchievement">
+        <div class="form-group">
+            <label for="Id" class="col-md-4 control-label">Событие:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    <option>Выберите событие</option>
+                    @foreach (var m in Model.Events)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Id" class="col-md-4 control-label">Спортсмен:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    <option>Выберите спортсмена</option>
+                    @foreach (var m in Model.Athletes)
+                    {
+                        <option value="@m.Id">@m.Initials</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Description" class="col-md-4 control-label">Спортивная дисциплина:</label>
+            <div class="col-xs-8">
+                <div class="input-group">
+                    <input type="text" name="Description" value="@Model.Achievement.KindOfSport" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Id" class="col-md-4 control-label">Награда:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    <option>Выберите награду</option>
+                    @foreach (var m in Model.Prizes)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-success" value="Добавить" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-6">
+    <h2>Форма изменения достижения</h2>
+
+    <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeAchievement">
+        <div class="form-group">
+            <label for="Id" class="col-md-4 control-label">Событие:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    <option>Выберите событие</option>
+                    @foreach (var m in Model.Events)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Id" class="col-md-4 control-label">Событие:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    <option>Выберите спортсмена</option>
+                    @foreach (var m in Model.Athletes)
+                    {
+                        <option value="@m.Id">@m.Initials</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Description" class="col-md-4 control-label">Спортивная дисциплина:</label>
+            <div class="col-xs-8">
+                <div class="input-group">
+                    <input type="text" name="Description" value="@Model.Achievement.KindOfSport" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Id" class="col-md-4 control-label">Награда:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    <option>Выберите награду</option>
+                    @foreach (var m in Model.Prizes)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-success" value="Добавить" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-6">
+    <h2>Удаление достижения</h2>
+    <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteAchievement">
+        <div class="form-group row">
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите достижение</option>
+                @foreach (var x in @Model.Achievements)
+            {
+                    <option value="@x.Id">@x.Athlete.Initials - @x.Event.Name - @x.Prize.Name - @x.KindOfSport</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-danger" value="Удалить" />
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,14 @@
+﻿@model List<Infokiosk.Models.KindOfSport>
+@{
+    ViewBag.Title = "View";
+}
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <a class="btn btn-default btn-group-justified" href="/Home/KindOfSportDescription/@item.Id">@item.Name</a>
+            </div>
+        </div>
+    }
+</div>  

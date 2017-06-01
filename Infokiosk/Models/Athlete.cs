@@ -11,5 +11,6 @@ namespace Infokiosk.Models
         public string Initials { get; set; }
         
         public List<Achievement> Achievements { get; set; }
+        public List<Image> Images { get; set; }
     }
 }
