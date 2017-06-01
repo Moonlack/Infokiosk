@@ -5,6 +5,53 @@
 }
 
 <h2>Athletes</h2>
+<script src="~/Scripts/dropzone/dropzone.min.js"></script>
+<link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
+@*<div class="col-sm-12">
+        <h1>Filess</h1>
+    <form action="~/SportsFacilities/UploadImages" class="dropzone" id="dropzoneJsForm" style="background-color:#00BFFF">
+        <div class="form-group">
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите спортивный объект</option>
+                @foreach (var x in @Model.Athletes)
+                {
+                    <option value="@x.Id">@x.Initials</option>
+                }
+            </select>
+        </div>
+        <button id="submit-all"> Submit All Files</button>
+    </form>
+        <script type="text/javascript">
+
+            Dropzone.options.dropzoneForm =
+                {
+                    init: function () {
+                        this.on("complete", function (data) {
+                            //var res = eval('(' + data.xhr.responseText + ')');
+                            var res = JSON.parse(data.xhr.responseText);
+                        });
+                    }
+                };
+        </script>
+    </div>*@
+<div>
+    <form action="/Admin/UploadImagesAthlete" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите спортсмена</option>
+                @foreach (var x in @Model.Athletes)
+            {
+                    <option value="@x.Id">@x.Initials</option>
+                }
+            </select>
+        </div>
+        <input type="file" name="uploads" multiple/>
+        <button id="submit-all"> Submit All Files</button>
+    </form>
+
+</div>
+
+
 
 <div class="col-sm-6">
     <h2>Добавление спортсмена</h2>

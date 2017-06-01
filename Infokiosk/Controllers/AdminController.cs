@@ -192,7 +192,70 @@ namespace Infokiosk.Controllers
             }
             return View("Succes");
         }
-#endregion
+
+        [HttpPost]
+        public ActionResult UploadImagesAthlete(int id, IEnumerable<HttpPostedFileBase> uploads)
+        {
+            List<Image> files = new List<Image>();
+            //bool isSavedSuccessfully = true;
+            //string fName = "";
+            //try
+            //{
+            //    foreach (string fileName in Request.Files)
+            //    {
+            //        HttpPostedFileBase file = Request.Files[fileName];
+            //        fName = file.FileName;
+            //        if (file != null && file.ContentLength > 0)
+            //        {
+            //            var path = Path.Combine(Server.MapPath("~/Content/Media/Athletes"));
+            //            string pathString = Path.Combine(path.ToString());
+            //            var fileName1 = Path.GetFileName(file.FileName);
+            //            bool isExists = Directory.Exists(pathString);
+            //            if (!isExists) Directory.CreateDirectory(pathString);
+            //            var uploadpath = string.Format("{0}\\{1}", pathString, file.FileName);
+            //            file.SaveAs(uploadpath);
+            //            files.Add(new Image { Filename = uploadpath });
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    isSavedSuccessfully = false;
+            //}
+            //if (isSavedSuccessfully)
+            //{
+            //    return Json(new
+            //    {
+            //        Message = fName
+            //    });
+            //}
+            //else
+            //{
+            //    return Json(new
+            //    {
+            //        Message = "Error in saving file"
+            //    });
+
+            //}
+            //db.Images.AddRange(paths);
+            foreach (var file in uploads)
+            {
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    string path = Server.MapPath("~/Content/Media/Athletes/" + fileName);
+                    file.SaveAs(path);
+                    files.Add(new Image { Filename = "/Content/Media/Athletes/" + fileName });
+                }
+            }
+
+            db.Athletes.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        #endregion
 
         #region Achievements
         public ActionResult Achievements()

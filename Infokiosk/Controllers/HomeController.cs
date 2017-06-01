@@ -60,7 +60,7 @@ namespace Infokiosk.Controllers
                     .Include(x => x.Event)
                     .Include(x => x.Prize)
                     .ToList(),
-                Athletes = db.Athletes.Where(x => x.Achievements.FirstOrDefault().EventId == id).ToList()
+                Athletes = db.Athletes.Where(x => x.Achievements.FirstOrDefault().EventId == id).Include(x => x.Images).ToList()
             };
 
             return View(model);
@@ -97,7 +97,7 @@ namespace Infokiosk.Controllers
 
         public ActionResult AthleteDescription(int id)
         {
-            var model = db.Athletes.FirstOrDefault(x => x.Id == id);
+            var model = db.Athletes.Include(x=>x.Images).FirstOrDefault(x => x.Id == id);
             return View(model);
         }
 

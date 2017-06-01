@@ -451,6 +451,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Media\Athletes\" />
     <Folder Include="Content\Media\SportsFacilities\" />
   </ItemGroup>
   <ItemGroup>

@@ -29,26 +29,27 @@
 <div class="col-sm-6">
     <h2 class="text-center">Призеры</h2>
     <div class=" row">
-        @try
-        {
-            foreach (var athlete in Model.Athletes)
+        @foreach (var athlete in Model.Athletes)
             {
-                <div class="col-lg-4 col-md-6 ">
-                    <a href="/Home/AthleteDescription/@athlete.Id">
-                        <div class="thumbnail item-card">
-                            @*@{var path = athlete.Images +"\\Folder.jpg"}*@
-                            <img src="~/Content/Media/1.jpg" alt="...">
-                            <div class="caption">
+            <div class="col-lg-4 col-md-6 ">
+                <a href="/Home/AthleteDescription/@athlete.Id">
+                    <div class="thumbnail item-card">
+                        @*@{var path = athlete.Images +"\\Folder.jpg"}*@
+                        @try
+                        {<img src="@athlete.Images.First().Filename" />}
+                        catch (Exception)
+                        {<img src="~/Content/Media/1.jpg" alt="...">}
 
-                                <h3 class="text-center">@athlete.Initials</h3>
+                        <div class="caption">
 
-                            </div>
+                            <h3 class="text-center">@athlete.Initials</h3>
+
                         </div>
-                    </a>
-                </div>
-            }
+                    </div>
+                </a>
+            </div>
         }
-        catch (Exception e) { }
+
     </div>
 </div>
 

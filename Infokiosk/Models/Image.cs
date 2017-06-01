@@ -11,7 +11,6 @@ namespace Infokiosk.Models
         public string Filename { get; set; }
         public string Caption { get; set; }
 
-        public SportsFacility SportsFacility { get; set; }
-        public int SportsFacilityId { get; set; }
+        public Athlete  Athlete { get; set; }
     }
 }
