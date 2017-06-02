@@ -76,7 +76,7 @@ namespace Infokiosk.Controllers
             }
             return View("Succes");
         }
-#endregion
+        #endregion
 
         #region Exhibits
 
@@ -135,6 +135,29 @@ namespace Infokiosk.Controllers
             }
             return View("Succes");
         }
+
+        [HttpPost]
+        public ActionResult UploadImagesExhibit(int id, IEnumerable<HttpPostedFileBase> uploads)
+        {
+            List<Image> files = new List<Image>();
+            foreach (var file in uploads)
+            {
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    string path = Server.MapPath("~/Content/Media/Athletes/" + fileName);
+                    file.SaveAs(path);
+                    files.Add(new Image { Filename = "/Content/Media/Athletes/" + fileName });
+                }
+            }
+
+            db.Exhibits.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        #endregion
 #endregion
 
         #region Athletes
