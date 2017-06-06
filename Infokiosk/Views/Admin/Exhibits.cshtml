@@ -4,38 +4,38 @@
     Layout = "~/Views/Admin/AdminLayout.cshtml";
 }
 
-<h2>Exhibits</h2>
+<h1 class="text-center">Экспонаты</h1>
 
 <div class="col-sm-6">
     <h2>Добавление экспоната</h2>
     <form method="post" class="form-horizontal" role="form" action="/Admin/AddExhibit">
         <div class="form-group">
-            <label for="Name" class="col-md-3 control-label">Название:</label>
-            <div class="col-xs-6">
+            <label for="Name" class="col-xs-4 control-label">Название:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Name" value="@Model.Exhibit.Name" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Category" class="col-md-3 control-label">Категория экспоната:</label>
-            <div class="col-xs-6">
+            <label for="Category" class="col-xs-4 control-label">Категория экспоната:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Category" value="@Model.Exhibit.Category" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Description" class="col-md-3 control-label">Описание:</label>
-            <div class="col-xs-6">
+            <label for="Description" class="col-xs-4 control-label">Описание:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Description" value="@Model.Exhibit.Description" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Images" class="col-md-3 control-label">Изображения:</label>
-            <div class="col-xs-6">
+            <label for="Images" class="col-xs-4 control-label">Изображения:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Images" value="@Model.Exhibit.Images" class="form-control" />
                 </div>
@@ -54,8 +54,8 @@
 
     <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeExhibit">
         <div class="form-group">
-            <label for="Id" class="col-md-3 control-label">Экспонат:</label>
-            <div class="col-xs-6">
+            <label for="Id" class="col-xs-4 control-label">Экспонат:</label>
+            <div class="col-xs-8">
                 <select class="selectpicker form-control" name="Id">
                     @foreach (var m in Model.Exhibits)
                     {
@@ -65,32 +65,32 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="Name" class="col-md-3 control-label">Название:</label>
-            <div class="col-xs-6">
+            <label for="Name" class="col-xs-4 control-label">Название:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Name" value="@Model.Exhibit.Name" class="form-control" title="asd" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Category" class="col-md-3 control-label">Категория экспоната:</label>
-            <div class="col-xs-6">
+            <label for="Category" class="col-xs-4 control-label">Категория экспоната:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Category" value="@Model.Exhibit.Category" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Description" class="col-md-3 control-label">Описание:</label>
-            <div class="col-xs-6">
+            <label for="Description" class="col-xs-4 control-label">Описание:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Description" value="@Model.Exhibit.Description" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Images" class="col-md-3 control-label">Изображения:</label>
-            <div class="col-xs-6">
+            <label for="Images" class="col-xs-4 control-label">Изображения:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Images" value="@Model.Exhibit.Images" class="form-control" />
                 </div>
@@ -108,6 +108,7 @@
     <h2>Удаление экспоната</h2>
     <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteExhibit">
         <div class="form-group">
+            <label for="id" class="col-xs-4 control-label">Экспонат:</label>
             <select class="selectpicker form-control" name="id">
                 <option value="">Выберите экспонат</option>
                 @foreach (var x in @Model.Exhibits)
@@ -124,56 +125,19 @@
     </form>
 </div>
 
-@*@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Exhibit</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
+<div class="col-sm-6">
+    <h2>Загрузка изображений</h2>
+    <form action="/Admin/UploadImagesExhibit" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-            </div>
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите экспонат</option>
+                @foreach (var x in @Model.Exhibits)
+            {
+                    <option value="@x.Id">@x.Name</option>
+                }
+            </select>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Images, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+        <input type="file" name="uploads" multiple />
+        <button id="submit-all">Добавить изображения</button>
+    </form>
+</div>

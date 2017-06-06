@@ -31,3 +31,6 @@ textarea {
     height: 300px !important;
 }
 
+.thumbnail img {
+    max-height: 200px;
+}

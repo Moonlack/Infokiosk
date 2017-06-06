@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,19 +45,46 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Markdown, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
-      <HintPath>..\packages\Markdown.2.2.1\lib\net451\Markdown.dll</HintPath>
+    <Reference Include="Markdig, Version=0.12.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.0.12.1\lib\net40\Markdig.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.3.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.3.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.3.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.3.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.3.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -111,39 +138,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -152,18 +148,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SportsFacilitiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Achievement.cs" />
-    <Compile Include="Models\SportsFacilities\AdminSportsFacilitiesViewModel.cs" />
+    <Compile Include="Models\AdminKindsOfSportsViewModel.cs" />
+    <Compile Include="Models\AdminSportsFacilitiesViewModel.cs" />
     <Compile Include="Models\AdminAthletesViewModel.cs" />
     <Compile Include="Models\AdminAchievementsViewModel.cs" />
     <Compile Include="Models\AdminExhibitsViewModel.cs" />
     <Compile Include="Models\AdminEventsViewModel.cs" />
     <Compile Include="Models\Athlete.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventCategory.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\Exhibit.cs" />
     <Compile Include="Models\Image.cs" />
@@ -172,10 +169,8 @@
     <Compile Include="Models\KindOfSport.cs" />
     <Compile Include="Models\MassSport.cs" />
     <Compile Include="Models\Prize.cs" />
-    <Compile Include="Models\SportsFacilities\SportsFacilitiesViewModel.cs" />
     <Compile Include="Models\SportsFacility.cs" />
     <Compile Include="Models\SportsFacilityCategory.cs" />
-    <Compile Include="Models\SportsFacilities\SportsFacilityViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +179,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Media\1.jpg" />
+    <Content Include="Content\Media\Athletes\Вадим Махнев.txt" />
+    <Content Include="Content\Media\Events\Пекин 2008.txt" />
     <Content Include="Content\Media\Exhibits\ДИПЛОМ И КУБОК АЛЕКСАНДРА МЕДВЕДЯ\us_diplom_medved.jpg" />
     <Content Include="Content\Media\Exhibits\ДИПЛОМ И КУБОК АЛЕКСАНДРА МЕДВЕДЯ\us_kubok_medved.png" />
     <Content Include="Content\Media\Exhibits\КОМПЛЕКТ СПОРТИВНОЙ ФОРМЫ ДАРЬИ ДОМРАЧЕВОЙ\Um_Sv_kostum_Domracheva.png" />
@@ -269,113 +266,6 @@
     <Content Include="Content\Media\Exhibits\Ракетки Максима Мирного и Виктории Азаренко\Um_Sv_Mirniy_v.png" />
     <Content Include="Content\Media\Exhibits\СЕРЕБРЯНАЯ МЕДАЛЬ ЧЕМПИОНАТА ЕВРОПЫ 2005\us_med_T_Sivakova.png" />
     <Content Include="Content\Media\Exhibits\СЕРТИФИКАТ И МЕДАЛЬ Э.ЗВЕРЕВОЙ. АФИНЫ-2004\umn_sw_zwerewa_medal_sertif.png" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Medal_Afiny.png" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Olimp_sity_view_Afiny2.png" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Aripgadzhiev_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Batiyshko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Bichik_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Cilinskaya_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Gelah_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Karsten_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Mahnev_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Makarenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Makarov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Martynov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Nesterenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Petrushenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Rybakov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Stukalova_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Tihon_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Yatchenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Afi_Zyev_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Afiny 2004\Ol_Atl_Medved_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Medal_Atlanta.png" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Olimp_sity_view_Atlanta2.png" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_8ka_greblya_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Basinskiy_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Cilent_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Dubrovshik_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Kaptiyh_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Karsten_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Lishtvan_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Sazanovich_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Sherbo_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Atlanta 1996\Ol_Atl_Zvereva_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Medal_Pekin.png" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Olimp_sity_view_Pekin2.png" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Abalmasov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Aryamnov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Bichik_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_BogdanovichAdr_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_BogdanovichA_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Devjatovskij_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Gajdarov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Gelah_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Karsten_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Kravchenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Litvinchuk_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Mahnev_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Menkova_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_MihnevichN_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Mihnevich_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Novikova_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Ostapchuk_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Petrushenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Romankov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Rybakov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_SbHudozh_Gimn_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Semenov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Tihon_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Beijing 2008\Ol_Pek_Zhukova_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Torino 2006\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Lillehammer 1994\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Lillehammer 1994\Medal_Lillehammer.png" />
-    <Content Include="Content\Media\OlympicGames\Lillehammer 1994\Olimp_sity_view_Lillehammer2.png" />
-    <Content Include="Content\Media\OlympicGames\Lillehammer 1994\Ol_Lil_Paramygina_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Lillehammer 1994\Ol_Lil_Redkin_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Lillehammer 1994\Ol_Lil_Zheleznovskij_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\London 2012\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Nagano 1998\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Nagano 1998\Medal_Nagano.png" />
-    <Content Include="Content\Media\OlympicGames\Nagano 1998\Olimp_sity_view_Nagano2.png" />
-    <Content Include="Content\Media\OlympicGames\Nagano 1998\Ol_Dashhinskij_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Nagano 1998\Ol_Nag_Ajdarov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Nagano 1998\Ol_Nag_Popov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Salt-Lake-Sity 2002\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Salt-Lake-Sity 2002\Medal_Salt_Lake.png" />
-    <Content Include="Content\Media\OlympicGames\Salt-Lake-Sity 2002\Olimp_sity_view_Solt_Lake2.png" />
-    <Content Include="Content\Media\OlympicGames\Salt-Lake-Sity 2002\Ol_Grishin_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Salt-Lake-Sity 2002\Ol_Salt_Ryzhenkov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Medal_Sydney.png" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Olimp_sity_view_Sydney2.png" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Astapkovich_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Basinskiy_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Debelka_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Dovgal_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Evglevskaya_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Karolchik_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Karsten_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Larjukov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Lavrenov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Martynov_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Oleschuk_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Raskina_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Sazanovich_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_sborn_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Yatchenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Sydney 2000\Ol_Syd_Zvereva_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Torino 2006\Medal_Torino.png" />
-    <Content Include="Content\Media\OlympicGames\Torino 2006\Olimp_sity_view_Turin2.png" />
-    <Content Include="Content\Media\OlympicGames\Vancouver 2010\Folder.png" />
-    <Content Include="Content\Media\OlympicGames\Vancouver 2010\Medal_Vancouver.png" />
-    <Content Include="Content\Media\OlympicGames\Vancouver 2010\Olimp_sity_view_Vancuver2.png" />
-    <Content Include="Content\Media\OlympicGames\Vancouver 2010\Ol_Van_Antonenko_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Vancouver 2010\Ol_Van_Domracheva_M.jpg" />
-    <Content Include="Content\Media\OlympicGames\Vancouver 2010\Ol_Van_Novikov_M.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -395,23 +285,20 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CardScript.js" />
-    <Content Include="Scripts\dropzone\basic.css" />
-    <Content Include="Scripts\dropzone\basic.min.css" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
-    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
-    <Content Include="Scripts\dropzone\dropzone.css" />
-    <Content Include="Scripts\dropzone\dropzone.js" />
-    <Content Include="Scripts\dropzone\dropzone.min.css" />
-    <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -448,17 +335,17 @@
     <Content Include="Views\Admin\Succes.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Event.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Media\Athletes\" />
+    <Folder Include="Content\Media\KindsOfSports\" />
+    <Folder Include="Content\Media\OlympicGames\" />
     <Folder Include="Content\Media\SportsFacilities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -492,8 +379,8 @@
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

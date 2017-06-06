@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 using Infokiosk.Models;
+using Markdig;
 
 namespace Infokiosk.Controllers
 {
@@ -21,8 +22,7 @@ namespace Infokiosk.Controllers
 
         public ActionResult OlympicGames()
         {
-            var games = db.Events.Include(x => x.Achievements).ToList();
-
+            var games = db.Events.Where(x=>x.Category.Name.Contains("Олимпийские игры")).OrderBy(x => x.Name).Include(x => x.Achievements).Include(x=>x.Category).ToList();
             return View(games);
         }
 
@@ -33,7 +33,7 @@ namespace Infokiosk.Controllers
 
         public ActionResult Exhibits()
         {
-            var exhibits = db.Exhibits.Where(x => x.Category == null).ToList();
+            var exhibits = db.Exhibits.OrderBy(x => x.Name).Where(x => x.Category == null).ToList();
             return View(exhibits);
         }
 
@@ -45,61 +45,67 @@ namespace Infokiosk.Controllers
 
         public ActionResult Medals()
         {
-            var exhibits = db.Exhibits.Where(x => x.Category != null).ToList();
+            var exhibits = db.Exhibits.OrderBy(x => x.Name).Where(x => x.Category != null).ToList();
             return View(exhibits);
         }
 
         public ActionResult EventDescription(int id)
         {
-           var model = new EventViewModel
+            var model = new EventViewModel
             {
                 Event = db.Events.FirstOrDefault(x => x.Id == id),
-                //Files = Directory.GetFiles(db.Events.FirstOrDefault(x => x.Id == id).Description).ToList(),
                 Achievements = db.Achievements.Where(x => x.EventId == id)
-                    .Include(x => x.Athlete)
-                    .Include(x => x.Event)
-                    .Include(x => x.Prize)
-                    .ToList(),
-                Athletes = db.Athletes.Where(x => x.Achievements.FirstOrDefault().EventId == id).Include(x => x.Images).ToList()
+                     .Include(x => x.Athlete)
+                     .Include(x => x.Event)
+                     .Include(x => x.Prize).ToList(),
+                Athletes = db.Athletes.OrderBy(x => x.Initials).Where(x => x.Achievements.FirstOrDefault().EventId == id).Include(x => x.Images).ToList()
             };
 
+            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(model.Event.Description));
             return View(model);
         }
         public ActionResult KindsOfSports()
         {
-            var kindOfSports = db.KindsOfSports.ToList();
+            var kindOfSports = db.KindsOfSports.OrderBy(x => x.Name).ToList();
             return View(kindOfSports);
         }
 
         public ActionResult KindOfSportDescription(int id)
         {
             var kindOfSport = db.KindsOfSports.FirstOrDefault(x => x.Id == id);
+            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(kindOfSport.Description));
             return View(kindOfSport);
         }
 
         public ActionResult SportsFacilities()
         {
-            var model = db.SportsFacilityCategories.Include(x => x.SportsFacilities).ToList();
+            var model = db.SportsFacilities.OrderBy(x => x.Name).Include(x => x.Images).Include(x => x.Category).ToList();
             return View(model);
         }
 
         public ActionResult SportsFacilityDescription(int id)
         {
-            var sf = db.SportsFacilities.FirstOrDefault(x => x.Id == id);
-            //var img = Directory.EnumerateFiles(Server.MapPath(sf.Images)).ToArray();
-            //for(int i=0;i<img.Count();i++)
-            //{
-            //    img[i] =@"\"+img[i].Remove(0, img[i].IndexOf("Content"));
-            //}
-            //var model = new SportsFacilityViewModel { SportsFacility = sf,Images= img.ToList() };
+            var sf = db.SportsFacilities.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
+            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(sf.Description));
             return View(sf);
         }
 
         public ActionResult AthleteDescription(int id)
         {
-            var model = db.Athletes.Include(x=>x.Images).FirstOrDefault(x => x.Id == id);
+            var model = db.Athletes.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
+            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(model.Description));
             return View(model);
         }
 
+        public string GetDescription(string path)
+        {
+            try { var sr = new StreamReader(Server.MapPath("~/" + path), System.Text.Encoding.Default);
+            return sr.ReadToEnd();}
+            catch (Exception)
+            {
+                return "Возникла ошибка при загрузке файла. Проверьте наличие файла";
+            }
+            
+        }
     }
 }

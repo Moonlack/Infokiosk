@@ -12,7 +12,10 @@ namespace Infokiosk.Models
         //{ }
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<Athlete> Athletes { get; set; }
+
+        public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<Event> Events { get; set; }
+
         public DbSet<Exhibit> Exhibits { get; set; }
         public DbSet<KindOfSport> KindsOfSports { get; set; }
 

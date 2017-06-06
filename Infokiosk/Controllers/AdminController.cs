@@ -23,7 +23,13 @@ namespace Infokiosk.Controllers
 
         public ActionResult Events()
         {
-            var model = new AdminEventsViewModel { Events = db.Events.OrderBy(x => x.Name).ToList(), Event = new Event() };
+            var model = new AdminEventsViewModel
+            {
+                Events = db.Events.OrderBy(x => x.Name).ToList(),
+                Event = new Event(),
+                Categories = db.EventCategories.OrderBy(x => x.Name).ToList(),
+                Category = new EventCategory()
+            };
             return View(model);
         }
 
@@ -39,7 +45,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Events");
         }
 
         [HttpGet]
@@ -55,7 +61,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Events");
         }
 
         [HttpPost]
@@ -74,8 +80,62 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Events");
         }
+
+        [HttpPost]
+        public ActionResult UploadImagesEvents(int id, IEnumerable<HttpPostedFileBase> uploads)
+        {
+            List<Image> files = new List<Image>();
+            foreach (var file in uploads)
+            {
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = Path.GetFileName(file.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    string path = Server.MapPath("~/Content/Media/Events/" + fileName);
+                    file.SaveAs(path);
+                    files.Add(new Image { Filename = "/Content/Media/Events/" + fileName });
+                }
+            }
+
+            db.Events.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
+            db.SaveChanges();
+            return RedirectToAction("Events");
+        }
+
+        [HttpPost]
+        public ActionResult AddEventCategory(EventCategory ev)
+        {
+            try
+            {
+                db.EventCategories.Add(ev);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("Fail");
+            }
+            return RedirectToAction("Events");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteEventCategory(int id)
+        {
+            try
+            {
+                var x = db.EventCategories.Find(id);
+                db.EventCategories.Remove(x);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("Fail");
+            }
+            return RedirectToAction("Events");
+        }
+
         #endregion
 
         #region Exhibits
@@ -98,7 +158,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Exhibits");
         }
 
         [HttpGet]
@@ -114,7 +174,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Exhibits");
         }
 
         [HttpPost]
@@ -133,7 +193,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Exhibits");
         }
 
         [HttpPost]
@@ -145,20 +205,19 @@ namespace Infokiosk.Controllers
                 if (file != null)
                 {
                     // получаем имя файла
-                    string fileName = System.IO.Path.GetFileName(file.FileName);
+                    string fileName = Path.GetFileName(file.FileName);
                     // сохраняем файл в папку Files в проекте
-                    string path = Server.MapPath("~/Content/Media/Athletes/" + fileName);
+                    string path = Server.MapPath("~/Content/Media/Exhibits/" + fileName);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/Athletes/" + fileName });
+                    files.Add(new Image { Filename = "/Content/Media/Exhibits/" + fileName });
                 }
             }
 
             db.Exhibits.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Exhibits");
         }
         #endregion
-#endregion
 
         #region Athletes
 
@@ -180,7 +239,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Athletes");
         }
 
         [HttpGet]
@@ -196,7 +255,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Athletes");
         }
 
         [HttpPost]
@@ -213,7 +272,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Athletes");
         }
 
         [HttpPost]
@@ -268,15 +327,16 @@ namespace Infokiosk.Controllers
                     // получаем имя файла
                     string fileName = System.IO.Path.GetFileName(file.FileName);
                     // сохраняем файл в папку Files в проекте
-                    string path = Server.MapPath("~/Content/Media/Athletes/" + fileName);
+                    string fn = Guid.NewGuid().ToString() + ".jpg";
+                    string path = Server.MapPath("~/Content/Media/Athletes/" + fn);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/Athletes/" + fileName });
+                    files.Add(new Image { Filename = "/Content/Media/Athletes/" + fn });
                 }
             }
 
             db.Athletes.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Athletes");
         }
         #endregion
 
@@ -285,10 +345,10 @@ namespace Infokiosk.Controllers
         {
             var model = new AdminAchievementsViewModel
             {
-                Athletes = db.Athletes.ToList(),
-                Prizes = db.Prizes.ToList(),
-                Events = db.Events.ToList(),
-                Achievements = db.Achievements.ToList(),
+                Athletes = db.Athletes.OrderBy(x => x.Initials).ToList(),
+                Prizes = db.Prizes.OrderBy(x => x.Id).ToList(),
+                Events = db.Events.OrderBy(x => x.Name).ToList(),
+                Achievements = db.Achievements.OrderBy(x => x.Athlete.Initials).ToList(),
                 Achievement = new Achievement()
             };
             return View(model);
@@ -306,7 +366,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Achievements");
         }
 
         [HttpGet]
@@ -322,7 +382,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("Achievements");
         }
 
         [HttpPost]
@@ -350,7 +410,7 @@ namespace Infokiosk.Controllers
             //}
             //catch (Exception)
             //{
-            return View("Fail");
+            return View("Achievements");
             //}
             //return View("Succes");
         }
@@ -369,18 +429,18 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddSportsFacility(SportsFacility sportsFacility)
+        public ActionResult AddSportsFacility(SportsFacility sportsFaclity)
         {
             try
             {
-                db.SportsFacilities.Add(sportsFacility);
+                db.SportsFacilities.Add(sportsFaclity);
                 db.SaveChanges();
             }
             catch (Exception)
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("SportsFacilities");
         }
 
         [HttpGet]
@@ -396,7 +456,7 @@ namespace Infokiosk.Controllers
             {
                 return View("Fail");
             }
-            return View("Succes");
+            return RedirectToAction("SportsFacilities");
         }
 
         [HttpPost]
@@ -428,6 +488,109 @@ namespace Infokiosk.Controllers
             //}
             //return View("Succes");
         }
+
+        [HttpPost]
+        public ActionResult UploadImagesSportsFacility(int id, IEnumerable<HttpPostedFileBase> uploads)
+        {
+            List<Image> files = new List<Image>();
+            foreach (var file in uploads)
+            {
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = Path.GetFileName(file.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    string fn = Guid.NewGuid().ToString() + ".jpg";
+                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
+                    file.SaveAs(path);
+                    files.Add(new Image { Filename = "/Content/Media/SportsFacilities/" + fn });
+                }
+            }
+            db.SportsFacilities.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
+            db.SaveChanges();
+            return RedirectToAction("SportsFacilities");
+        }
+
+        #endregion
+
+        #region KindsOfSports
+
+        public ActionResult KindsOfSports()
+        {
+            var model = new AdminKindsOfSportsViewModel { KindsOfSports = db.KindsOfSports.OrderBy(x => x.Name).ToList(), KindOfSport = new KindOfSport() };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddKindOfSport(KindOfSport kindOfSport)
+        {
+            try
+            {
+                db.KindsOfSports.Add(kindOfSport);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("Fail");
+            }
+            return RedirectToAction("KindsOfSports");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteKindOfSport(int id)
+        {
+            try
+            {
+                var x = db.KindsOfSports.Find(id);
+                db.KindsOfSports.Remove(x);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("Fail");
+            }
+            return RedirectToAction("KindsOfSports");
+        }
+
+        [HttpPost]
+        public ActionResult ChangeKindOfSport(KindOfSport kindOfSport)
+        {
+            try
+            {
+                var x = db.Events.Find(kindOfSport.Id);
+                if (kindOfSport.Name != null) x.Name = kindOfSport.Name;
+                if (kindOfSport.Description != null) x.Description = kindOfSport.Description;
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("Fail");
+            }
+            return RedirectToAction("KindsOfSports");
+        }
+
+        [HttpPost]
+        public ActionResult UploadImagesKindOfSport(int id, IEnumerable<HttpPostedFileBase> uploads)
+        {
+            List<Image> files = new List<Image>();
+            foreach (var file in uploads)
+            {
+                if (file != null)
+                {
+                    // получаем имя файла
+                    string fileName = Path.GetFileName(file.FileName);
+                    // сохраняем файл в папку Files в проекте
+                    string path = Server.MapPath("~/Content/Media/KindsOfSports/" + fileName);
+                    file.SaveAs(path);
+                    files.Add(new Image { Filename = "/Content/Media/KindsOfSport/" + fileName });
+                }
+            }
+
+            db.KindsOfSports.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
+            db.SaveChanges();
+            return RedirectToAction("KindsOfSports");
+        }
+
         #endregion
 
         [HttpPost]
@@ -455,7 +618,7 @@ namespace Infokiosk.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 isSavedSuccessfully = false;
             }

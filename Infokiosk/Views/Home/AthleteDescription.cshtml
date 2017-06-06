@@ -8,6 +8,7 @@
         <h2 class="text-center">@Model.Initials</h2>
         @foreach(var image in Model.Images)
         { <p>@image.Filename</p>}
+        @Html.Raw(ViewData["Description"])
     </div>
     <div class="col-sm-6">
        <h2 class="text-center">Галлерея</h2>

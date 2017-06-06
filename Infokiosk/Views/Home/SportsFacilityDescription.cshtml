@@ -33,11 +33,11 @@
                     
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="@Model.Images.First()" class="center-block" alt="...">
+                            <img src="@Model.Images.First().Filename" class="center-block" alt="...">
                         </div>
                         @foreach (var item in Model.Images.Skip(1)) {
                         <div class="item">
-                            <img src="@item" class="center-block">
+                            <img src="@item.Filename" class="center-block">
                     </div>
                         }
                     </div>

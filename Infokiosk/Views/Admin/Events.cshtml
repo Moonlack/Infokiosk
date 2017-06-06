@@ -1,41 +1,45 @@
 ﻿@model Infokiosk.Models.AdminEventsViewModel
+
 @{
     ViewBag.Title = "Events";
     Layout = "~/Views/Admin/AdminLayout.cshtml";
 }
 
-<h2>Events</h2>
+<h1 class="text-center">События</h1>
 
 <div class="col-sm-6">
     <h2>Добавление события</h2>
-    <form method="post" class="form-horizontal" role="form"action="AddEvent">
+    <form method="post" class="form-horizontal" role="form" action="/Admin/AddEvent">
         <div class="form-group">
-            <label for="Name" class="col-md-3 control-label">Название:</label>
-            <div class="col-xs-6">
+            <label for="Name" class="col-xs-4 control-label">Название:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Name" value="@Model.Event.Name" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Category" class="col-md-3 control-label">Категория события:</label>
-            <div class="col-xs-6">
-                <div class="input-group">
-                    <input type="text" name="Category" value="@Model.Event.Category" class="form-control" />
-                </div>
+            <label for="Category" class="col-xs-4 control-label">Категория события:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Category">
+                    @foreach (var m in Model.Categories)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
             </div>
         </div>
         <div class="form-group">
-            <label for="Description" class="col-md-3 control-label">Описание:</label>
-            <div class="col-xs-6">
+            <label for="Description" class="col-xs-4 control-label">Описание:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Description" value="@Model.Event.Description" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Images" class="col-md-3 control-label">Изображения:</label>
-            <div class="col-xs-6">
+            <label for="Images" class="col-xs-4 control-label">Изображения:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Images" value="@Model.Event.Images" class="form-control" />
                 </div>
@@ -51,11 +55,10 @@
 
 <div class="col-md-6">
     <h2>Форма изменения события</h2>
-
     <form method="post" class="form-horizontal" role="form" asp-controller="Admin" asp-action="ChangeEvent">
         <div class="form-group">
-            <label for="Id" class="col-md-3 control-label">Событие:</label>
-            <div class="col-xs-6">
+            <label for="Id" class="col-xs-4 control-label">Спортивное событие:</label>
+            <div class="col-xs-8">
                 <select class="selectpicker form-control" name="Id">
                     @foreach (var m in Model.Events)
                     {
@@ -65,32 +68,35 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="Name" class="col-md-3 control-label">Название:</label>
-            <div class="col-xs-6">
+            <label for="Name" class="col-xs-4 control-label">Название:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
-                    <input type="text" name="Name" value="@Model.Event.Name" class="form-control" title="asd"/>
+                    <input type="text" name="Name" value="@Model.Event.Name" class="form-control" title="asd" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Category" class="col-md-3 control-label">Категория события:</label>
-            <div class="col-xs-6">
-                <div class="input-group">
-                    <input type="text" name="Category" value="@Model.Event.Category" class="form-control" />
-                </div>
+            <label for="Category" class="col-xs-4 control-label">Категория события:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Category">
+                    @foreach (var m in Model.Categories)
+                    {
+                        <option value="@m.Id">@m.Name</option>
+                    }
+                </select>
             </div>
         </div>
         <div class="form-group">
-            <label for="Description" class="col-md-3 control-label">Описание:</label>
-            <div class="col-xs-6">
+            <label for="Description" class="col-xs-4 control-label">Описание:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Description" value="@Model.Event.Description" class="form-control" />
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <label for="Images" class="col-md-3 control-label">Изображения:</label>
-            <div class="col-xs-6">
+            <label for="Images" class="col-xs-4 control-label">Изображения:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Images" value="@Model.Event.Images" class="form-control" />
                 </div>
@@ -106,10 +112,11 @@
 
 <div class="col-sm-6">
     <h2>Удаление события</h2>
-    <form method="get" class="form-horizontal" role="form"asp-controller="Admin" asp-action="DeleteEvent">
+    <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteEvent">
         <div class="form-group">
+            <label for="id" class="col-xs-4 control-label">Событие:</label>
             <select class="selectpicker form-control" name="id">
-                <option value="">Выберите событие</option>
+                <option value="">Выберите спортивное событие</option>
                 @foreach (var x in @Model.Events)
             {
                     <option value="@x.Id">@x.Name</option>
@@ -122,4 +129,67 @@
             </div>
         </div>
     </form>
+</div>
+
+<div class="col-sm-6">
+    <h2>Загрузка изображений</h2>
+    <form action="/Admin/UploadImagesEvent" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="id" class="col-xs-4 control-label">Событие:</label>
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите спортивное событие</option>
+                @foreach (var x in @Model.Events)
+            {
+                    <option value="@x.Id">@x.Name</option>
+                }
+            </select>
+        </div>
+        <input type="file" name="uploads" multiple />
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+
+                <button id="submit-all">Добавить изображения</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+    <h2>Добавление категории события</h2>
+    <form method="post" class="form-horizontal" role="form" action="/Admin/AddEventCategory">
+        <div class="form-group">
+            <label for="Name" class="col-xs-4 control-label">Название:</label>
+            <div class="col-xs-8">
+                <div class="input-group">
+                    <input type="text" name="Name" value="@Model.Category.Name" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" class="btn btn-success" value="Добавить" />
+            </div>
+        </div>
+    </form></div>
+    <div class="col-sm-6">
+        <h2>Удаление категории события</h2>
+        <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteEventCategory">
+            <div class="form-group">
+                <label for="id" class="col-xs-4 control-label">Событие:</label>
+                <select class="selectpicker form-control" name="id">
+                    <option value="">Выберите категорию спортивного события</option>
+                    @foreach (var x in @Model.Categories)
+            {
+                        <option value="@x.Id">@x.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-10">
+                    <input type="submit" class="btn btn-danger" value="Удалить" />
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Infokiosk.Models
 {
-    public class SportsFacilityCategory
+    public class EventCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }

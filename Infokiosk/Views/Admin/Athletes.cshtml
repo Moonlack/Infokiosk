@@ -4,71 +4,16 @@
     Layout = "~/Views/Admin/AdminLayout.cshtml";
 }
 
-<h2>Athletes</h2>
-<script src="~/Scripts/dropzone/dropzone.min.js"></script>
-<link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
-@*<div class="col-sm-12">
-        <h1>Filess</h1>
-    <form action="~/SportsFacilities/UploadImages" class="dropzone" id="dropzoneJsForm" style="background-color:#00BFFF">
-        <div class="form-group">
-            <select class="selectpicker form-control" name="id">
-                <option value="">Выберите спортивный объект</option>
-                @foreach (var x in @Model.Athletes)
-                {
-                    <option value="@x.Id">@x.Initials</option>
-                }
-            </select>
-        </div>
-        <button id="submit-all"> Submit All Files</button>
-    </form>
-        <script type="text/javascript">
-
-            Dropzone.options.dropzoneForm =
-                {
-                    init: function () {
-                        this.on("complete", function (data) {
-                            //var res = eval('(' + data.xhr.responseText + ')');
-                            var res = JSON.parse(data.xhr.responseText);
-                        });
-                    }
-                };
-        </script>
-    </div>*@
-<div>
-    <form action="/Admin/UploadImagesAthlete" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <select class="selectpicker form-control" name="id">
-                <option value="">Выберите спортсмена</option>
-                @foreach (var x in @Model.Athletes)
-            {
-                    <option value="@x.Id">@x.Initials</option>
-                }
-            </select>
-        </div>
-        <input type="file" name="uploads" multiple/>
-        <button id="submit-all"> Submit All Files</button>
-    </form>
-
-</div>
-
-
+<h1 class="text-center">Спортсмены</h1>
 
 <div class="col-sm-6">
     <h2>Добавление спортсмена</h2>
     <form method="post" class="form-horizontal" role="form" action="/Admin/AddAthlete">
         <div class="form-group">
-            <label for="Name" class="col-md-3 control-label">ФИО:</label>
-            <div class="col-xs-6">
+            <label for="Name" class="col-xs-4 control-label">ФИО:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Initials" value="@Model.Athlete.Initials" class="form-control" />
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="Category" class="col-md-3 control-label">Изображения:</label>
-            <div class="col-xs-6">
-                <div class="input-group">
-                    <input type="text" name="Category" value="@Model.Athlete.Images" class="form-control" />
                 </div>
             </div>
         </div>
@@ -82,11 +27,10 @@
 
 <div class="col-md-6">
     <h2>Форма изменения спортсмена</h2>
-
     <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeAthlete">
         <div class="form-group">
-            <label for="Id" class="col-md-3 control-label">Спортсмен:</label>
-            <div class="col-xs-6">
+            <label for="Id" class="col-xs-4 control-label">Спортсмен:</label>
+            <div class="col-xs-8">
                 <select class="selectpicker form-control" name="Id">
                     @foreach (var m in Model.Athletes)
                     {
@@ -96,18 +40,10 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="Name" class="col-md-3 control-label">ФИО:</label>
-            <div class="col-xs-6">
+            <label for="Name" class="col-xs-4 control-label">ФИО:</label>
+            <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Name" value="@Model.Athlete.Initials" class="form-control" title="asd" />
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="Category" class="col-md-3 control-label">Изображения:</label>
-            <div class="col-xs-6">
-                <div class="input-group">
-                    <input type="text" name="Category" value="@Model.Athlete.Images" class="form-control" />
                 </div>
             </div>
         </div>
@@ -136,5 +72,24 @@
                 <input type="submit" class="btn btn-danger" value="Удалить" />
             </div>
         </div>
+    </form>
+</div>
+
+<div class="col-sm-6">
+    <h2>Загрузка изображений</h2>
+    <form action="/Admin/UploadImagesAthlete" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="Id" class="col-xs-4 control-label">Спортсмен:</label>
+            <div class="col-xs-8">
+                <select class="selectpicker form-control" name="Id">
+                    @foreach (var m in Model.Athletes)
+                    {
+                        <option value="@m.Id">@m.Initials</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <input type="file" name="uploads" multiple />
+        <button id="submit-all">Добавить изображения</button>
     </form>
 </div>

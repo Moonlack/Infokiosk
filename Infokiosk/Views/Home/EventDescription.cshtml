@@ -2,22 +2,31 @@
 
 @{
     ViewBag.Title = "Home Page";
+    var list = Model.Achievements.GroupBy(x => x.Prize.Name);
 }
+
 
 <div class="col-sm-6">
     <h2 class="text-center">@Model.Event.Name</h2>
     <div class="row">
+        @Html.Raw(ViewData["Description"])
+    </div>
+    <div class="row">
+        
         @try
         {
-            foreach (var achievement in Model.Achievements)
+            foreach(var group in list)
             {
-
-                var message = achievement.Athlete.Initials + " - " + achievement.Prize.Name;
-                if (!achievement.KindOfSport.IsEmpty())
+                <h3>@group.Key</h3>
+                foreach (var item in group.OrderBy(x=>x.KindOfSport))
                 {
-                    message += " - " + achievement.KindOfSport;
+                    var message = item.Athlete.Initials + " - " + item.Prize.Name;
+                    if (!item.KindOfSport.IsEmpty())
+                    {
+                        message += " - " + item.KindOfSport;
+                    }
+                    <p>@message</p>
                 }
-                <p>@message</p>
             }
         }
         catch (Exception e) { }
