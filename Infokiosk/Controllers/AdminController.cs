@@ -16,7 +16,7 @@ namespace Infokiosk.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Exhibits");
         }
 
         #region Events
@@ -91,12 +91,10 @@ namespace Infokiosk.Controllers
             {
                 if (file != null)
                 {
-                    // получаем имя файла
-                    string fileName = Path.GetFileName(file.FileName);
-                    // сохраняем файл в папку Files в проекте
-                    string path = Server.MapPath("~/Content/Media/Events/" + fileName);
+                    string fn = Guid.NewGuid().ToString() + ".jpg";
+                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/Events/" + fileName });
+                    files.Add(new Image { Filename = "/Content/Media/SportsFacilities/" + fn });
                 }
             }
 
@@ -204,12 +202,10 @@ namespace Infokiosk.Controllers
             {
                 if (file != null)
                 {
-                    // получаем имя файла
-                    string fileName = Path.GetFileName(file.FileName);
-                    // сохраняем файл в папку Files в проекте
-                    string path = Server.MapPath("~/Content/Media/Exhibits/" + fileName);
+                    string fn = Guid.NewGuid().ToString() + ".jpg";
+                    string path = Server.MapPath("~/Content/Media/Exhibits/" + fn);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/Exhibits/" + fileName });
+                    files.Add(new Image { Filename = "/Content/Media/Exhibits/" + fn });
                 }
             }
 
@@ -324,8 +320,6 @@ namespace Infokiosk.Controllers
             {
                 if (file != null)
                 {
-                    // получаем имя файла
-                    string fileName = System.IO.Path.GetFileName(file.FileName);
                     // сохраняем файл в папку Files в проекте
                     string fn = Guid.NewGuid().ToString() + ".jpg";
                     string path = Server.MapPath("~/Content/Media/Athletes/" + fn);
@@ -497,8 +491,6 @@ namespace Infokiosk.Controllers
             {
                 if (file != null)
                 {
-                    // получаем имя файла
-                    string fileName = Path.GetFileName(file.FileName);
                     // сохраняем файл в папку Files в проекте
                     string fn = Guid.NewGuid().ToString() + ".jpg";
                     string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
@@ -577,12 +569,10 @@ namespace Infokiosk.Controllers
             {
                 if (file != null)
                 {
-                    // получаем имя файла
-                    string fileName = Path.GetFileName(file.FileName);
-                    // сохраняем файл в папку Files в проекте
-                    string path = Server.MapPath("~/Content/Media/KindsOfSports/" + fileName);
+                    string fn = Guid.NewGuid().ToString() + ".jpg";
+                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/KindsOfSport/" + fileName });
+                    files.Add(new Image { Filename = "/Content/Media/SportsFacilities/" + fn });
                 }
             }
 

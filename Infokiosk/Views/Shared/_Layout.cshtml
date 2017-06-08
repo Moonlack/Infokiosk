@@ -3,40 +3,39 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.25">
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Спорт", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse container">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Экспонаты", "Exhibits", "Home")</li>
-                    <li>@Html.ActionLink("Общая информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Олимпийские достижения", "OlympicGames", "Home")</li>
-                    <li>@Html.ActionLink("Спорт высших достижений", "KindsOfSports", "Home")</li>
-                    <li>@Html.ActionLink("Массовый спорт", "OlympicGames", "Home")</li>
-                    <li>@Html.ActionLink("Спортивные объекты", "SportsFacilities", "Home")</li>
-                </ul>
-            </div>
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Спорт", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
         </div>
+        <div class="navbar-collapse collapse container">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Экспонаты", "Exhibits", "Home")</li>
+                <li>@Html.ActionLink("Общая информация", "About", "Home")</li>
+                <li>@Html.ActionLink("Олимпийские достижения", "OlympicGames", "Home")</li>
+                <li>@Html.ActionLink("Спорт высших достижений", "KindsOfSports", "Home")</li>
+                <li>@Html.ActionLink("Спортивные объекты", "SportsFacilities", "Home")</li>
+            </ul>
+        </div>
+
     </div>
     <div class="row">
 
         <div class="col-sm-10 col-sm-offset-1" style=" padding-top: 30px">
             @RenderBody()
         </div>
-        </div>
+    </div>
 
 
     @Scripts.Render("~/bundles/jquery")

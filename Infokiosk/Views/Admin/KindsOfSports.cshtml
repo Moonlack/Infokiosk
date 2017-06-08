@@ -1,27 +1,12 @@
 ﻿@model Infokiosk.Models.AdminKindsOfSportsViewModel
 @{
     ViewBag.Title = "KindsOfSports";
-    Layout = "~/Views/Admin/AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 
-<h2>KindOfSports</h2>
+<h1 class="text-center">Виды спорта</h1>
 
-<div class="col-sm-6">
-    <form action="/Admin/UploadImagesKindOfSport" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <select class="selectpicker form-control" name="id">
-                <option value="">Выберите спортсмена</option>
-                @foreach (var x in Model.KindsOfSports)
-            {
-                    <option value="@x.">@x.Name</option>
-                }
-            </select>
-        </div>
-        <input type="file" name="uploads" multiple />
-        <button id="submit-all">Добавить изображения</button>
-    </form>
-</div>
 
 <div class="col-sm-6">
     <h2>Добавление вида спорта</h2>
@@ -46,7 +31,7 @@
     <h2>Форма изменения вида спорта</h2>
     <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeKindOfSport">
         <div class="form-group">
-            <label for="Id" class="col-xs-4 control-label">Спортсмен:</label>
+            <label for="Id" class="col-xs-4 control-label">Вид спорта:</label>
             <div class="col-xs-8">
                 <select class="selectpicker form-control" name="Id">
                     @foreach (var m in Model.KindsOfSports)
@@ -57,7 +42,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="Name" class="col-xs-4 control-label">ФИО:</label>
+            <label for="Name" class="col-xs-4 control-label">Вид спорта:</label>
             <div class="col-xs-8">
                 <div class="input-group">
                     <input type="text" name="Name" value="@Model.KindOfSport.Name" class="form-control" title="asd" />
@@ -73,11 +58,11 @@
 </div>
 
 <div class="col-sm-6">
-    <h2>Удаление спортсмена</h2>
+    <h2>Удаление вида спорта</h2>
     <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteKindOfSport">
         <div class="form-group">
             <select class="selectpicker form-control" name="id">
-                <option value="">Выберите спортсмен</option>
+                <option value="">Выберите вид спорта</option>
                 @foreach (var x in @Model.KindsOfSports)
             {
                     <option value="@x.Id">@x.Name</option>
@@ -89,5 +74,23 @@
                 <input type="submit" class="btn btn-danger" value="Удалить" />
             </div>
         </div>
+    </form>
+</div>
+
+
+<div class="col-sm-6">
+    <h2>Загрузка изображений</h2>
+    <form action="/Admin/UploadImagesKindOfSport" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <select class="selectpicker form-control" name="id">
+                <option value="">Выберите вид спорта</option>
+                @foreach (var x in Model.KindsOfSports)
+            {
+                    <option value="@x.">@x.Name</option>
+                }
+            </select>
+        </div>
+        <input type="file" name="uploads" multiple />
+        <button id="submit-all">Добавить изображения</button>
     </form>
 </div>

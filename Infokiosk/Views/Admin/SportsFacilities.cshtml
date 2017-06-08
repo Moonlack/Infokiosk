@@ -1,10 +1,10 @@
 ﻿@model Infokiosk.Models.AdminSportsFacilitiesViewModel
 @{
     ViewBag.Title = "SportsFacilities";
-    Layout = "~/Views/Admin/AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>SportsFacilities</h2>
+<h1 class="text-center">Спортивные объекты</h1>
 
 <div class="row">
 <div class="col-sm-6">
@@ -130,7 +130,7 @@
         <form action="/Admin/UploadImagesSportsFacility" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <select class="selectpicker form-control" name="id">
-                    <option value="">Выберите экспонат</option>
+                    <option value="">Выберите спортивный объект</option>
                     @foreach (var x in @Model.SportsFacilities)
             {
                         <option value="@x.Id">@x.Name</option>

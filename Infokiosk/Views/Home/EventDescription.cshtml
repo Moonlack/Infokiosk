@@ -42,12 +42,10 @@
             {
             <div class="col-lg-4 col-md-6 ">
                 <a href="/Home/AthleteDescription/@athlete.Id">
-                    <div class="thumbnail item-card">
+                    <div class="thumbnail item-card" style="height:320px">
                         @*@{var path = athlete.Images +"\\Folder.jpg"}*@
-                        @try
-                        {<img src="@athlete.Images.First().Filename" />}
-                        catch (Exception)
-                        {<img src="~/Content/Media/1.jpg" alt="...">}
+                       
+                        <img src="~/Content/Media/1.jpg" alt="...">
 
                         <div class="caption">
 
@@ -62,4 +60,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src="~/Scripts/CardScript.js"></script>
+@*<script type="text/javascript" src="~/Scripts/CardScript.js"></script>*@

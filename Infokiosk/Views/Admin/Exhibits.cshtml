@@ -1,7 +1,8 @@
 ﻿@model Infokiosk.Models.AdminExhibitsViewModel
 @{
     ViewBag.Title = "Exhibits";
-    Layout = "~/Views/Admin/AdminLayout.cshtml";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1 class="text-center">Экспонаты</h1>
@@ -17,14 +18,11 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="Category" class="col-xs-4 control-label">Категория экспоната:</label>
-            <div class="col-xs-8">
-                <div class="input-group">
-                    <input type="text" name="Category" value="@Model.Exhibit.Category" class="form-control" />
-                </div>
-            </div>
-        </div>
+        <select class="selectpicker form-control" name="Category">
+            <option value="">Выбрать, если медаль Олимпийских игр</option>
+                <option value="Медаль Олимпийских игр">Медаль Олимпийских игр</option>
+        </select>
+
         <div class="form-group">
             <label for="Description" class="col-xs-4 control-label">Описание:</label>
             <div class="col-xs-8">

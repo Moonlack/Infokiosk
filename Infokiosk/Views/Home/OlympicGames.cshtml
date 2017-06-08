@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "OlympicGames";
     var list = Model.GroupBy(x => x.Category.Name);
+    string path = "";
 }
 
 @foreach (var group in list)
@@ -12,49 +13,27 @@
             <div class="row">
                 @foreach (var game in group)
                 {
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            @{ var path = game.Images + "\\Folder.png"; }
-                            <a href="/Home/EventDescription/@game.Id"><img src="@path" alt="..." height="300"></a>
-                        </div>
-                    </div>
+
+                        <div class="col-sm-4">
+                            <div class="thumbnail">
+                                
+                               
+                                @{
+                                    try { path = game.Images.First().Filename; }
+                                    catch (ArgumentNullException) { path = @"/Content/Media/1.jpg"; }
+
+                                    <a href="/Home/EventDescription/@game.Id"><img src="https://upload.wikimedia.org/wikipedia/ru/thumb/5/5e/1996_Summer_Olympics.svg/1200px-1996_Summer_Olympics.svg.png" alt="..." height="300"></a>
                                 }
+                               
+                            </div>
+                        </div>
+                                        
+
+
+                                    }
             </div>
         </div>
     </div>
-                                }
-@*<div class="jumbotron">
-        <div class="container">
-            <h1 class="text-center">Зимние Олимпийские игры</h1>
-            <div class="row">
-                @foreach (var game in winter)
-                {
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            @{ var path = game.Images + "\\Folder.png"; }
-                            <a href="/Home/EventDescription/@game.Id"><img src="@path" alt="..." height="300"></a>
+                                    }
 
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="text-center">Летние Олимпийские игры</h1>
-            <div class="row">
-                @foreach (var game in summer)
-                {
-                    <div class="col-sm-4">
-                        <div class="thumbnail">
-                            @{ var path = game.Images + "\\Folder.png"; }
-                            <a href="/Home/EventDescription/@game.Id"><img src="@path" alt="..." height="300"></a>
-
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>*@
 <script type="text/javascript" src="~/Scripts/CardScript.js"></script>

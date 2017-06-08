@@ -40,6 +40,7 @@ namespace Infokiosk.Controllers
         public ActionResult ExhibitDescription(int id)
         {
             var exhibit = db.Exhibits.FirstOrDefault(x => x.Id == id);
+            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(exhibit.Description));
             return View(exhibit);
         }
 
@@ -60,7 +61,6 @@ namespace Infokiosk.Controllers
                      .Include(x => x.Prize).ToList(),
                 Athletes = db.Athletes.OrderBy(x => x.Initials).Where(x => x.Achievements.FirstOrDefault().EventId == id).Include(x => x.Images).ToList()
             };
-
             ViewData["Description"] = Markdown.ToHtml(this.GetDescription(model.Event.Description));
             return View(model);
         }
