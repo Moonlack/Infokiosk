@@ -1,8 +1,8 @@
 ﻿@model List<Infokiosk.Models.Exhibit>
 @{ string path = "";}
 <div class="row">
-    <div class="col-sm-3">
-        <div class="thumbnail item-card">
+    <div class="col-sm-3 item-card">
+        <div class="thumbnail">
             <a href="/Home/Medals">
                 <img src="~/Content/Media/1.jpg" alt="...">
                 <div class="caption">
@@ -12,12 +12,11 @@
                 </div>
             </a>
         </div>
-
     </div>
     @foreach (var exh in Model)
     {
-        <div class="col-sm-3">
-            <div class="thumbnail item-card">
+        <div class="col-sm-3 item-card">
+            <div class="thumbnail">
                 @try { path = exh.Images.First().Filename; }
                 catch (Exception) { path = @"/Content/Media/1.jpg"; }
                 <a href="/Home/ExhibitDescription/@exh.Id">
@@ -29,7 +28,6 @@
                     </div>
                 </a>
             </div>
-
         </div>
     }
 </div>

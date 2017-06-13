@@ -15,7 +15,7 @@
         @Html.Raw(ViewData["Description"])
     </div>
     <div class="col-sm-6">
-        @if (Model.Images != null)
+        @if (Model.Images.Count >0)
         {
         <div class=" row">
             <h2 class="text-center">Галерея</h2>
