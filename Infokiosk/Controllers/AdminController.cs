@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
@@ -26,7 +25,6 @@ namespace Infokiosk.Controllers
             var model = new AdminEventsViewModel
             {
                 Events = db.Events.OrderBy(x => x.Name).ToList(),
-                Event = new Event(),
                 Categories = db.EventCategories.OrderBy(x => x.Name).ToList(),
                 Category = new EventCategory()
             };
@@ -34,10 +32,19 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddEvent(Event ev)
+        public ActionResult AddEvent(string name, int category, HttpPostedFileBase description)
         {
             try
             {
+                var ev = new Event { Name = name, CategoryId = category };
+                if (description != null)
+                {
+                    // сохраняем файл в папку Files в проекте
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/Events/" + fn);
+                    description.SaveAs(path);
+                    ev.Description = "/Content/Media/Events/" + fn;
+                }
                 db.Events.Add(ev);
                 db.SaveChanges();
             }
@@ -65,15 +72,20 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeEvent(Event ev)
+        public ActionResult ChangeEvent(int id, string name, int category, HttpPostedFileBase description)
         {
             try
             {
-                var x = db.Events.Find(ev.Id);
-                if (ev.Name != null) x.Name = ev.Name;
-                if (ev.Category != null) x.Category = ev.Category;
-                if (ev.Description != null) x.Description = ev.Description;
-                if (ev.Images != null) x.Images = ev.Images;
+                var x = db.Events.First(y => y.Id == id);
+                if (name != "") x.Name = name;
+                if (category != 0) x.CategoryId = category;
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/Events/" + fn);
+                    description.SaveAs(path);
+                    x.Description = "/Content/Media/Events/" + fn;
+                }
                 db.SaveChanges();
             }
             catch (Exception)
@@ -92,9 +104,9 @@ namespace Infokiosk.Controllers
                 if (file != null)
                 {
                     string fn = Guid.NewGuid().ToString() + ".jpg";
-                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
+                    string path = Server.MapPath("~/Content/Media/Events/" + fn);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/SportsFacilities/" + fn });
+                    files.Add(new Image { Filename = "/Content/Media/Events/" + fn });
                 }
             }
 
@@ -140,15 +152,24 @@ namespace Infokiosk.Controllers
 
         public ActionResult Exhibits()
         {
-            var model = new AdminExhibitsViewModel { Exhibits = db.Exhibits.ToList(), Exhibit = new Exhibit() };
+            var model = db.Exhibits.OrderBy(x => x.Name).ToList();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddExhibit(Exhibit exhibit)
+        public ActionResult AddExhibit(string name, string category, HttpPostedFileBase description)
         {
             try
             {
+                var exhibit = new Exhibit { Name = name, Category = category };
+                if (description != null)
+                {
+                    // сохраняем файл в папку Files в проекте
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/Exhibits/" + fn);
+                    description.SaveAs(path);
+                    exhibit.Description = "/Content/Media/Exhibits/" + fn;
+                }
                 db.Exhibits.Add(exhibit);
                 db.SaveChanges();
             }
@@ -176,15 +197,21 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeExhibit(Exhibit exhibit)
+        public ActionResult ChangeExhibit(int id, string name, string category, HttpPostedFileBase description)
         {
             try
             {
-                var x = db.Exhibits.Find(exhibit.Id);
-                if (exhibit.Name != null) x.Name = exhibit.Name;
-                if (exhibit.Category != null) x.Category = exhibit.Category;
-                if (exhibit.Description != null) x.Description = exhibit.Description;
-                if (exhibit.Images != null) x.Images = exhibit.Images;
+                var x = db.Exhibits.First(y => y.Id == id);
+                if (name != "") x.Name = name;
+                if (category == "") { x.Category = null; }
+                else x.Category = category;
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/Exhibits/" + fn);
+                    description.SaveAs(path);
+                    x.Description = "/Content/Media/Exhibits/" + fn;
+                }
                 db.SaveChanges();
             }
             catch (Exception)
@@ -219,15 +246,25 @@ namespace Infokiosk.Controllers
 
         public ActionResult Athletes()
         {
-            var model = new AdminAthletesViewModel { Athletes = db.Athletes.ToList(), Athlete = new Athlete() };
+            var model = db.Athletes.OrderBy(x => x.Initials).ToList();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddAthlete(Athlete athlete)
+        public ActionResult AddAthlete(string initials, HttpPostedFileBase description)
         {
+
             try
             {
+                var athlete = new Athlete { Initials = initials };
+                if (description != null)
+                {
+                    // сохраняем файл в папку Files в проекте
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/Athletes/" + fn);
+                    description.SaveAs(path);
+                    athlete.Description = "/Content/Media/Athletes/" + fn;
+                }
                 db.Athletes.Add(athlete);
                 db.SaveChanges();
             }
@@ -255,13 +292,19 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeAthlete(Athlete athlete)
+        public ActionResult ChangeAthlete(int id, string initials, HttpPostedFileBase description)
         {
             try
             {
-                var x = db.Athletes.Find(athlete.Id);
-                if (athlete.Initials != null) x.Initials = athlete.Initials;
-                if (athlete.Images != null) x.Images = athlete.Images;
+                var x = db.Athletes.First(y => y.Id == id);
+                if (initials != null) x.Initials = initials;
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/Athletes/" + fn);
+                    description.SaveAs(path);
+                    x.Description = "/Content/Media/Athletes/" + fn;
+                }
                 db.SaveChanges();
             }
             catch (Exception)
@@ -275,47 +318,6 @@ namespace Infokiosk.Controllers
         public ActionResult UploadImagesAthlete(int id, IEnumerable<HttpPostedFileBase> uploads)
         {
             List<Image> files = new List<Image>();
-            //bool isSavedSuccessfully = true;
-            //string fName = "";
-            //try
-            //{
-            //    foreach (string fileName in Request.Files)
-            //    {
-            //        HttpPostedFileBase file = Request.Files[fileName];
-            //        fName = file.FileName;
-            //        if (file != null && file.ContentLength > 0)
-            //        {
-            //            var path = Path.Combine(Server.MapPath("~/Content/Media/Athletes"));
-            //            string pathString = Path.Combine(path.ToString());
-            //            var fileName1 = Path.GetFileName(file.FileName);
-            //            bool isExists = Directory.Exists(pathString);
-            //            if (!isExists) Directory.CreateDirectory(pathString);
-            //            var uploadpath = string.Format("{0}\\{1}", pathString, file.FileName);
-            //            file.SaveAs(uploadpath);
-            //            files.Add(new Image { Filename = uploadpath });
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    isSavedSuccessfully = false;
-            //}
-            //if (isSavedSuccessfully)
-            //{
-            //    return Json(new
-            //    {
-            //        Message = fName
-            //    });
-            //}
-            //else
-            //{
-            //    return Json(new
-            //    {
-            //        Message = "Error in saving file"
-            //    });
-
-            //}
-            //db.Images.AddRange(paths);
             foreach (var file in uploads)
             {
                 if (file != null)
@@ -379,35 +381,6 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Achievements");
         }
 
-        [HttpPost]
-        public ActionResult ChangeAchievement(Achievement Achievement)
-        {
-            //public int AthleteId { get; set; }
-            //public Athlete Athlete { get; set; }
-
-            //public int EventId { get; set; }
-            //public Event Event { get; set; }
-
-            //public string KindOfSport { get; set; }
-
-            //public int PrizeId { get; set; }
-            //public Prize Prize { get; set; }
-
-            //try
-            //{
-            //    var x = db.Achievements.Find(Achievement.Id);
-            //    if (Achievement.Name != null) x.Name = Achievement.Name;
-            //    if (Achievement.Category != null) x.Category = Achievement.Category;
-            //    if (Achievement.KindOfSport != null) x.KindOfSport = Achievement.KindOfSport;
-            //    if (Achievement.Images != null) x.Images = Achievement.Images;
-            //    db.SaveChanges();
-            //}
-            //catch (Exception)
-            //{
-            return View("Achievements");
-            //}
-            //return View("Succes");
-        }
         #endregion
 
         #region SportsFacilities
@@ -416,17 +389,24 @@ namespace Infokiosk.Controllers
             var model = new AdminSportsFacilitiesViewModel
             {
                 SportsFacilities = db.SportsFacilities.ToList(),
-                SportsFacility = new SportsFacility(),
                 Categories = db.SportsFacilityCategories.ToList()
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddSportsFacility(SportsFacility sportsFaclity)
+        public ActionResult AddSportsFacility(int category, string name, HttpPostedFileBase description)
         {
             try
             {
+                var sportsFaclity = new SportsFacility { Name = name, CategoryId = category };
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
+                    description.SaveAs(path);
+                    sportsFaclity.Description = "/Content/Media/SportsFacilities/" + fn;
+                }
                 db.SportsFacilities.Add(sportsFaclity);
                 db.SaveChanges();
             }
@@ -454,33 +434,27 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeSportsFacility(SportsFacility SportsFacility)
+        public ActionResult ChangeSportsFacility(int id, int category, string name, HttpPostedFileBase description)
         {
-            //public int AthleteId { get; set; }
-            //public Athlete Athlete { get; set; }
-
-            //public int EventId { get; set; }
-            //public Event Event { get; set; }
-
-            //public string KindOfSport { get; set; }
-
-            //public int PrizeId { get; set; }
-            //public Prize Prize { get; set; }
-
-            //try
-            //{
-            //    var x = db.SportsFacilities.Find(SportsFacility.Id);
-            //    if (SportsFacility.Name != null) x.Name = SportsFacility.Name;
-            //    if (SportsFacility.Category != null) x.Category = SportsFacility.Category;
-            //    if (SportsFacility.KindOfSport != null) x.KindOfSport = SportsFacility.KindOfSport;
-            //    if (SportsFacility.Images != null) x.Images = SportsFacility.Images;
-            //    db.SaveChanges();
-            //}
-            //catch (Exception)
-            //{
-            return View("Fail");
-            //}
-            //return View("Succes");
+            try
+            {
+                var x = db.SportsFacilities.First(y => y.Id == id);
+                if (name != "") x.Name = name;
+                if (category != 0) { x.Category = null; }
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
+                    description.SaveAs(path);
+                    x.Description = "/Content/Media/SportsFacilities/" + fn;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return View("Fail");
+            }
+            return RedirectToAction("SportsFacilities");
         }
 
         [HttpPost]
@@ -509,15 +483,23 @@ namespace Infokiosk.Controllers
 
         public ActionResult KindsOfSports()
         {
-            var model = new AdminKindsOfSportsViewModel { KindsOfSports = db.KindsOfSports.OrderBy(x => x.Name).ToList(), KindOfSport = new KindOfSport() };
+            var model = db.KindsOfSports.OrderBy(x => x.Name).ToList();
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddKindOfSport(KindOfSport kindOfSport)
+        public ActionResult AddKindOfSport(string name, HttpPostedFileBase description)
         {
             try
             {
+                var kindOfSport = new KindOfSport { Name = name };
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/KindsOfSports/" + fn);
+                    description.SaveAs(path);
+                    kindOfSport.Description = "/Content/Media/KindsOfSports/" + fn;
+                }
                 db.KindsOfSports.Add(kindOfSport);
                 db.SaveChanges();
             }
@@ -545,13 +527,19 @@ namespace Infokiosk.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeKindOfSport(KindOfSport kindOfSport)
+        public ActionResult ChangeKindOfSport(int id, string name, HttpPostedFileBase description)
         {
             try
             {
-                var x = db.Events.Find(kindOfSport.Id);
-                if (kindOfSport.Name != null) x.Name = kindOfSport.Name;
-                if (kindOfSport.Description != null) x.Description = kindOfSport.Description;
+                var x = db.KindsOfSports.First(y => y.Id == id);
+                if (name != "") x.Name = name;
+                if (description != null)
+                {
+                    string fn = description.FileName;
+                    string path = Server.MapPath("~/Content/Media/KindsOfSports/" + fn);
+                    description.SaveAs(path);
+                    x.Description = "/Content/Media/KindsOfSports/" + fn;
+                }
                 db.SaveChanges();
             }
             catch (Exception)

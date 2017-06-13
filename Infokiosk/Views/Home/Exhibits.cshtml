@@ -1,4 +1,5 @@
 ﻿@model List<Infokiosk.Models.Exhibit>
+@{ string path = "";}
 <div class="row">
     <div class="col-sm-3">
         <div class="thumbnail item-card">
@@ -17,8 +18,10 @@
     {
         <div class="col-sm-3">
             <div class="thumbnail item-card">
+                @try { path = exh.Images.First().Filename; }
+                catch (Exception) { path = @"/Content/Media/1.jpg"; }
                 <a href="/Home/ExhibitDescription/@exh.Id">
-                    <img src="~/Content/Media/1.jpg" alt="...">
+                    <img src="@path" alt="...">
                     <div class="caption">
 
                         <h3 class="text-center">@exh.Name</h3>

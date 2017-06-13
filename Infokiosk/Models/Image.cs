@@ -9,7 +9,6 @@ namespace Infokiosk.Models
     {
         public int Id { get; set; }
         public string Filename { get; set; }
-        public string Caption { get; set; }
 
         public Athlete  Athlete { get; set; }
         public Exhibit Exhibit { get; set; }

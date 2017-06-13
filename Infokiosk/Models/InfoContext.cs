@@ -19,7 +19,7 @@ namespace Infokiosk.Models
         public DbSet<Exhibit> Exhibits { get; set; }
         public DbSet<KindOfSport> KindsOfSports { get; set; }
 
-        public DbSet<MassSport> MassSports { get; set; }
+        //public DbSet<MassSport> MassSports { get; set; }
         public DbSet<Prize> Prizes { get; set; }
 
         public DbSet<SportsFacility> SportsFacilities { get; set; }

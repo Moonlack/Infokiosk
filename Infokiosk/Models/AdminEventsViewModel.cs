@@ -8,7 +8,6 @@ namespace Infokiosk.Models
     public class AdminEventsViewModel
     {
         public List<Event> Events { get; set; }
-        public Event Event { get; set; }
         public List<EventCategory> Categories { get; set; }
         public EventCategory Category { get; set; }
     }

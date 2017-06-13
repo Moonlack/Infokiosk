@@ -152,11 +152,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Achievement.cs" />
-    <Compile Include="Models\AdminKindsOfSportsViewModel.cs" />
     <Compile Include="Models\AdminSportsFacilitiesViewModel.cs" />
-    <Compile Include="Models\AdminAthletesViewModel.cs" />
     <Compile Include="Models\AdminAchievementsViewModel.cs" />
-    <Compile Include="Models\AdminExhibitsViewModel.cs" />
     <Compile Include="Models\AdminEventsViewModel.cs" />
     <Compile Include="Models\Athlete.cs" />
     <Compile Include="Models\Event.cs" />
@@ -167,7 +164,6 @@
     <Compile Include="Models\InfoContext.cs" />
     <Compile Include="Models\InfoDbInitializer.cs" />
     <Compile Include="Models\KindOfSport.cs" />
-    <Compile Include="Models\MassSport.cs" />
     <Compile Include="Models\Prize.cs" />
     <Compile Include="Models\SportsFacility.cs" />
     <Compile Include="Models\SportsFacilityCategory.cs" />

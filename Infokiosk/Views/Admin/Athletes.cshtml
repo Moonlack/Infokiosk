@@ -1,4 +1,4 @@
-﻿@model Infokiosk.Models.AdminAthletesViewModel
+﻿@model List<Infokiosk.Models.Athlete>
 @{
     ViewBag.Title = "Athletes";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -8,14 +8,14 @@
 
 <div class="col-sm-6">
     <h2>Добавление спортсмена</h2>
-    <form method="post" class="form-horizontal" role="form" action="/Admin/AddAthlete">
+    <form method="post" class="form-horizontal" role="form" action="/Admin/AddAthlete" enctype="multipart/form-data">
         <div class="form-group">
             <label for="Name" class="col-xs-4 control-label">ФИО:</label>
-            <div class="col-xs-8">
-                <div class="input-group">
-                    <input type="text" name="Initials" value="@Model.Athlete.Initials" class="form-control" />
-                </div>
-            </div>
+            <input type="text" name="Initials" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-xs-4 control-label">Файл с описанием:</label>
+            <input type="file" name="description" />
         </div>
         <div class="form-group">
             <div class="col-md-offset-3 col-md-10">
@@ -27,25 +27,23 @@
 
 <div class="col-md-6">
     <h2>Форма изменения спортсмена</h2>
-    <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeAthlete">
+    <form method="post" class="form-horizontal" role="form" action="/Admin/ChangeAthlete" enctype="multipart/form-data">
         <div class="form-group">
             <label for="Id" class="col-xs-4 control-label">Спортсмен:</label>
-            <div class="col-xs-8">
-                <select class="selectpicker form-control" name="Id">
-                    @foreach (var m in Model.Athletes)
-                    {
-                        <option value="@m.Id">@m.Initials</option>
-                    }
-                </select>
-            </div>
+            <select class="selectpicker form-control" name="Id">
+                @foreach (var m in Model)
+                {
+                    <option value="@m.Id">@m.Initials</option>
+                }
+            </select>
         </div>
         <div class="form-group">
             <label for="Name" class="col-xs-4 control-label">ФИО:</label>
-            <div class="col-xs-8">
-                <div class="input-group">
-                    <input type="text" name="Name" value="@Model.Athlete.Initials" class="form-control" title="asd" />
-                </div>
-            </div>
+            <input type="text" name="initials" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-xs-4 control-label">Файл с описанием:</label>
+            <input type="file" class="form-control" name="description" />
         </div>
         <div class="form-group">
             <div class="col-md-offset-3 col-md-10">
@@ -59,9 +57,10 @@
     <h2>Удаление спортсмена</h2>
     <form method="get" class="form-horizontal" role="form" action="/Admin/DeleteAthlete">
         <div class="form-group">
+            <label class="col-xs-4 control-label">Спортсмен:</label>
             <select class="selectpicker form-control" name="id">
-                <option value="">Выберите спортсмен</option>
-                @foreach (var x in @Model.Athletes)
+                <option value="">Выберите спортсмена</option>
+                @foreach (var x in @Model)
             {
                     <option value="@x.Id">@x.Initials</option>
                 }
@@ -77,19 +76,22 @@
 
 <div class="col-sm-6">
     <h2>Загрузка изображений</h2>
-    <form action="/Admin/UploadImagesAthlete" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="/Admin/UploadImagesAthlete" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="Id" class="col-xs-4 control-label">Спортсмен:</label>
-            <div class="col-xs-8">
-                <select class="selectpicker form-control" name="Id">
-                    @foreach (var m in Model.Athletes)
-                    {
-                        <option value="@m.Id">@m.Initials</option>
-                    }
-                </select>
-            </div>
+            <select class="selectpicker form-control" name="Id">
+                @foreach (var m in Model)
+                {
+                    <option value="@m.Id">@m.Initials</option>
+                }
+            </select>
         </div>
-        <input type="file" name="uploads" multiple />
-        <button id="submit-all">Добавить изображения</button>
+        <div class="form-group">
+            <label for="uploads" class="col-xs-4 control-label">Файлы:</label>
+            <input type="file" class="form-control" name="uploads" multiple />
+        </div>
+        <div class="col-md-offset-3 col-md-10">
+            <button id="submit-all" class="btn btn-success">Добавить изображения</button>
+        </div>
     </form>
 </div>

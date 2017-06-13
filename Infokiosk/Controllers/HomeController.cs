@@ -20,9 +20,10 @@ namespace Infokiosk.Controllers
             return View();
         }
 
+        //Вывод блаблабла
         public ActionResult OlympicGames()
         {
-            var games = db.Events.Where(x=>x.Category.Name.Contains("Олимпийские игры")).OrderBy(x => x.Name).Include(x => x.Achievements).Include(x=>x.Category).ToList();
+            var games = db.Events.Where(x => x.Category.Name.Contains("Олимпийские игры")).Include(x => x.Achievements).Include(x => x.Category).Include(x => x.Images).OrderBy(x => x.Name).ToList();
             return View(games);
         }
 
@@ -33,20 +34,20 @@ namespace Infokiosk.Controllers
 
         public ActionResult Exhibits()
         {
-            var exhibits = db.Exhibits.OrderBy(x => x.Name).Where(x => x.Category == null).ToList();
+            var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category == null).ToList();
             return View(exhibits);
         }
 
         public ActionResult ExhibitDescription(int id)
         {
-            var exhibit = db.Exhibits.FirstOrDefault(x => x.Id == id);
+            var exhibit = db.Exhibits.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
             ViewData["Description"] = Markdown.ToHtml(this.GetDescription(exhibit.Description));
             return View(exhibit);
         }
 
         public ActionResult Medals()
         {
-            var exhibits = db.Exhibits.OrderBy(x => x.Name).Where(x => x.Category != null).ToList();
+            var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category != null).ToList();
             return View(exhibits);
         }
 
@@ -99,13 +100,17 @@ namespace Infokiosk.Controllers
 
         public string GetDescription(string path)
         {
-            try { var sr = new StreamReader(Server.MapPath("~/" + path), System.Text.Encoding.Default);
-            return sr.ReadToEnd();}
+            try
+            {
+                using (var sr = new StreamReader(Server.MapPath("~/" + path), System.Text.Encoding.Default))
+                { return sr.ReadToEnd(); };
+
+            }
             catch (Exception)
             {
                 return "Возникла ошибка при загрузке файла. Проверьте наличие файла";
             }
-            
+
         }
     }
 }

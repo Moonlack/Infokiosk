@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
     var list = Model.Achievements.GroupBy(x => x.Prize.Name);
+    string path = "";
 }
 
 
@@ -43,12 +44,12 @@
             <div class="col-lg-4 col-md-6 ">
                 <a href="/Home/AthleteDescription/@athlete.Id">
                     <div class="thumbnail item-card" style="height:320px">
-                        @*@{var path = athlete.Images +"\\Folder.jpg"}*@
-                       
-                        <img src="~/Content/Media/1.jpg" alt="...">
-
+                        @{ 
+                        try { path = athlete.Images.First().Filename; }
+                        catch (Exception) { path = @"/Content/Media/1.jpg"; }
+                        <img src="@path" >
+                        }
                         <div class="caption">
-
                             <h3 class="text-center">@athlete.Initials</h3>
 
                         </div>
