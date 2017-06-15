@@ -13,13 +13,14 @@ namespace Infokiosk.Controllers
     {
         public InfoContext db = new InfoContext();
 
+        //Отображение страница для администрирования экспонатов
         public ActionResult Index()
         {
             return RedirectToAction("Exhibits");
         }
 
         #region Events
-
+        //Отображение страница для администрирования событий
         public ActionResult Events()
         {
             var model = new AdminEventsViewModel
@@ -31,6 +32,7 @@ namespace Infokiosk.Controllers
             return View(model);
         }
 
+        //Добавление события
         [HttpPost]
         public ActionResult AddEvent(string name, int category, HttpPostedFileBase description)
         {
@@ -55,6 +57,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Events");
         }
 
+        //Удаление выбранного события
         [HttpGet]
         public ActionResult DeleteEvent(int id)
         {
@@ -71,6 +74,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Events");
         }
 
+        //Изменение выбранного события
         [HttpPost]
         public ActionResult ChangeEvent(int id, string name, int category, HttpPostedFileBase description)
         {
@@ -95,6 +99,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Events");
         }
 
+        //Загрузка изображений для выбранного события
         [HttpPost]
         public ActionResult UploadImagesEvents(int id, IEnumerable<HttpPostedFileBase> uploads)
         {
@@ -115,6 +120,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Events");
         }
 
+        //Добавление категории события
         [HttpPost]
         public ActionResult AddEventCategory(EventCategory ev)
         {
@@ -130,6 +136,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Events");
         }
 
+        //Удаление выбранной категории события
         [HttpGet]
         public ActionResult DeleteEventCategory(int id)
         {
@@ -150,12 +157,14 @@ namespace Infokiosk.Controllers
 
         #region Exhibits
 
+        //Отображение страница для администрирования экспонатов
         public ActionResult Exhibits()
         {
             var model = db.Exhibits.OrderBy(x => x.Name).ToList();
             return View(model);
         }
 
+        //Добавление экспоната
         [HttpPost]
         public ActionResult AddExhibit(string name, string category, HttpPostedFileBase description)
         {
@@ -180,6 +189,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Exhibits");
         }
 
+        //Удаление выбранного экспоната
         [HttpGet]
         public ActionResult DeleteExhibit(int id)
         {
@@ -196,6 +206,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Exhibits");
         }
 
+        //Изменение выбранного экспоната
         [HttpPost]
         public ActionResult ChangeExhibit(int id, string name, string category, HttpPostedFileBase description)
         {
@@ -221,6 +232,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Exhibits");
         }
 
+        //Загрузка изображений для выбранного экспоната
         [HttpPost]
         public ActionResult UploadImagesExhibit(int id, IEnumerable<HttpPostedFileBase> uploads)
         {
@@ -244,12 +256,14 @@ namespace Infokiosk.Controllers
 
         #region Athletes
 
+        //Отображение страница для администрирования спортсменов
         public ActionResult Athletes()
         {
             var model = db.Athletes.OrderBy(x => x.Initials).ToList();
             return View(model);
         }
 
+        //Добавление спортсмена
         [HttpPost]
         public ActionResult AddAthlete(string initials, HttpPostedFileBase description)
         {
@@ -275,6 +289,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Athletes");
         }
 
+        //Удаление выбранного спортсмена
         [HttpGet]
         public ActionResult DeleteAthlete(int id)
         {
@@ -291,6 +306,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Athletes");
         }
 
+        //Изменение выбранного спортсмена
         [HttpPost]
         public ActionResult ChangeAthlete(int id, string initials, HttpPostedFileBase description)
         {
@@ -314,6 +330,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Athletes");
         }
 
+        //Загрузка изображений для выбранного спортсмена
         [HttpPost]
         public ActionResult UploadImagesAthlete(int id, IEnumerable<HttpPostedFileBase> uploads)
         {
@@ -337,6 +354,8 @@ namespace Infokiosk.Controllers
         #endregion
 
         #region Achievements
+
+        //Отображение страница для администрирования достижений
         public ActionResult Achievements()
         {
             var model = new AdminAchievementsViewModel
@@ -350,12 +369,13 @@ namespace Infokiosk.Controllers
             return View(model);
         }
 
+        //Добавление достижения
         [HttpPost]
-        public ActionResult AddAchievement(Achievement achievement)
+        public ActionResult AddAchievement( int athleteId, int eventId, string kindOfSport, int prizeId)
         {
             try
             {
-                db.Achievements.Add(achievement);
+                db.Achievements.Add(new Achievement { AthleteId = athleteId, EventId = eventId, KindOfSport = kindOfSport, PrizeId = prizeId});
                 db.SaveChanges();
             }
             catch (Exception)
@@ -365,6 +385,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("Achievements");
         }
 
+        //Удаление выбранного достижения
         [HttpGet]
         public ActionResult DeleteAchievement(int id)
         {
@@ -384,6 +405,8 @@ namespace Infokiosk.Controllers
         #endregion
 
         #region SportsFacilities
+
+        //Отображение страница для администрирования спортивных объектов
         public ActionResult SportsFacilities()
         {
             var model = new AdminSportsFacilitiesViewModel
@@ -394,6 +417,7 @@ namespace Infokiosk.Controllers
             return View(model);
         }
 
+        //Добавление спортивного объекта
         [HttpPost]
         public ActionResult AddSportsFacility(int category, string name, HttpPostedFileBase description)
         {
@@ -417,6 +441,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("SportsFacilities");
         }
 
+        //Удаление выбранного спортивного объекта
         [HttpGet]
         public ActionResult DeleteSportsFacility(int id)
         {
@@ -433,6 +458,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("SportsFacilities");
         }
 
+        //Изменение выбранного спортивного объекта
         [HttpPost]
         public ActionResult ChangeSportsFacility(int id, int category, string name, HttpPostedFileBase description)
         {
@@ -457,6 +483,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("SportsFacilities");
         }
 
+        //Загрузка изображений для выбранного спортивного объекта
         [HttpPost]
         public ActionResult UploadImagesSportsFacility(int id, IEnumerable<HttpPostedFileBase> uploads)
         {
@@ -481,12 +508,14 @@ namespace Infokiosk.Controllers
 
         #region KindsOfSports
 
+        //Отображение страница для администрирования видов спорта
         public ActionResult KindsOfSports()
         {
             var model = db.KindsOfSports.OrderBy(x => x.Name).ToList();
             return View(model);
         }
 
+        //Добавление вид спорта
         [HttpPost]
         public ActionResult AddKindOfSport(string name, HttpPostedFileBase description)
         {
@@ -510,6 +539,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("KindsOfSports");
         }
 
+        //Удаление выбранного вида спорта
         [HttpGet]
         public ActionResult DeleteKindOfSport(int id)
         {
@@ -526,6 +556,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("KindsOfSports");
         }
 
+        //Изменение выбранного вида спорта
         [HttpPost]
         public ActionResult ChangeKindOfSport(int id, string name, HttpPostedFileBase description)
         {
@@ -549,6 +580,7 @@ namespace Infokiosk.Controllers
             return RedirectToAction("KindsOfSports");
         }
 
+        //Загрузка изображений для выбранного вида спорта
         [HttpPost]
         public ActionResult UploadImagesKindOfSport(int id, IEnumerable<HttpPostedFileBase> uploads)
         {
@@ -570,56 +602,5 @@ namespace Infokiosk.Controllers
         }
 
         #endregion
-
-        [HttpPost]
-        public ActionResult UploadImages(int id)
-        {
-            List<Image> files = new List<Image>();
-            bool isSavedSuccessfully = true;
-            string fName = "";
-            try
-            {
-                foreach (string fileName in Request.Files)
-                {
-                    HttpPostedFileBase file = Request.Files[fileName];
-                    fName = file.FileName;
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        var path = Path.Combine(Server.MapPath("~/Content/Media/SportsFacilities"));
-                        string pathString = Path.Combine(path.ToString());
-                        var fileName1 = Path.GetFileName(file.FileName);
-                        bool isExists = Directory.Exists(pathString);
-                        if (!isExists) Directory.CreateDirectory(pathString);
-                        var uploadpath = string.Format("{0}\\{1}", pathString, file.FileName);
-                        file.SaveAs(uploadpath);
-                        files.Add(new Image { Filename = uploadpath });
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                isSavedSuccessfully = false;
-            }
-            if (isSavedSuccessfully)
-            {
-                return Json(new
-                {
-                    Message = fName
-                });
-            }
-            else
-            {
-                return Json(new
-                {
-                    Message = "Error in saving file"
-                });
-
-            }
-            //db.Images.AddRange(paths);
-            db.SportsFacilities.First(x => x.Id == id).Images.AddRange(files);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
     }
 }

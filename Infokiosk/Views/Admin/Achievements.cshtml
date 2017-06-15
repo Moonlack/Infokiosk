@@ -10,8 +10,8 @@
     <h2>Добавление достижения</h2>
     <form method="post" class="form-horizontal" role="form" action="/Admin/AddAchievement">
         <div class="form-group">
-            <label for="Id" class="col-md-4 control-label">Событие:</label>
-            <select class="selectpicker form-control" name="Id">
+            <label for="eventId" class="col-md-4 control-label">Событие:</label>
+            <select class="selectpicker form-control" name="eventId">
                 <option>Выберите событие</option>
                 @foreach (var m in Model.Events)
                 {
@@ -20,8 +20,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="Id" class="col-md-4 control-label">Спортсмен:</label>
-            <select class="selectpicker form-control" name="Id">
+            <label for="athleteId" class="col-md-4 control-label">Спортсмен:</label>
+            <select class="selectpicker form-control" name="athleteId">
                 <option>Выберите спортсмена</option>
                 @foreach (var m in Model.Athletes)
                 {
@@ -30,12 +30,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="Description" class="col-md-4 control-label">Спортивная дисциплина:</label>
-            <input type="text" name="Description" value="@Model.Achievement.KindOfSport" class="form-control" />
+            <label for="kindOfSport" class="col-md-4 control-label">Спортивная дисциплина:</label>
+            <input type="text" name="kindOfSport" class="form-control" />
         </div>
         <div class="form-group">
-            <label for="Id" class="col-md-4 control-label">Награда:</label>
-            <select class="selectpicker form-control" name="Id">
+            <label for="prizeId" class="col-md-4 control-label">Награда:</label>
+            <select class="selectpicker form-control" name="prizeId">
                 <option>Выберите награду</option>
                 @foreach (var m in Model.Prizes)
                 {
