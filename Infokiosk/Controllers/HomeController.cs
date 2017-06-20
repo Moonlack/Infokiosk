@@ -49,7 +49,7 @@ namespace Infokiosk.Controllers
         //Отображение страницы с медалями Олимпийских игр
         public ActionResult Medals()
         {
-            var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category != null).ToList();
+            var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category == "Медаль Олимпийских игр").ToList();
             return View(exhibits);
         }
 
