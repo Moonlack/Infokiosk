@@ -630,15 +630,16 @@ namespace Infokiosk.Controllers
                 if (file != null)
                 {
                     string fn = Guid.NewGuid().ToString() + ".jpg";
-                    string path = Server.MapPath("~/Content/Media/SportsFacilities/" + fn);
+                    string path = Server.MapPath("~/Content/Media/KindsOfSports/" + fn);
                     file.SaveAs(path);
-                    files.Add(new Image { Filename = "/Content/Media/SportsFacilities/" + fn });
+                    files.Add(new Image { Filename = "/Content/Media/KindsOfSports/" + fn });
                 }
             }
 
             db.KindsOfSports.Include(x => x.Images).First(x => x.Id == id).Images.AddRange(files);
             db.SaveChanges();
             return RedirectToAction("KindsOfSports");
+
         }
 
         #endregion
