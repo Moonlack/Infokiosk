@@ -159,6 +159,7 @@
     <Compile Include="Models\AdminEventsViewModel.cs" />
     <Compile Include="Models\Athlete.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventAthletes.cs" />
     <Compile Include="Models\EventCategory.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\Exhibit.cs" />
@@ -177,8 +178,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Media\1.jpg" />
-    <Content Include="Content\Media\Athletes\Вадим Махнев.txt" />
-    <Content Include="Content\Media\Events\Пекин 2008.txt" />
     <Content Include="Content\Media\Exhibits\medals.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -196,7 +195,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ClassDiagram1.cd" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -248,7 +247,6 @@
     <Content Include="Views\Admin\Achievements.cshtml" />
     <Content Include="Views\Admin\Prizes.cshtml" />
     <Content Include="Views\Admin\Fail.cshtml" />
-    <Content Include="Views\Admin\Succes.cshtml" />
     <Content Include="Views\Event.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -256,6 +254,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Media\Athletes\" />
+    <Folder Include="Content\Media\Events\" />
     <Folder Include="Content\Media\KindsOfSports\" />
     <Folder Include="Content\Media\OlympicGames\" />
     <Folder Include="Content\Media\SportsFacilities\" />

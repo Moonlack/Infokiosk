@@ -17,19 +17,19 @@ namespace Infokiosk.Models
             var pr3 = new Prize { Name = "Бронзовая медаль" };
             var pr4 = new Prize { Name = "Знаменосец" };
 
-            var athl1 = new Athlete { Initials = "Вадим Махнев", Description = "/Content/Media/Athletes/Вадим Махнев.txt" };
-            var athl2 = new Athlete { Initials = "Александр Романьков" };
-            var athl3 = new Athlete { Initials = "Алексей Аблмасов" };
-            var athl4 = new Athlete { Initials = "Артур Литвинчук" };
-            var athl5 = new Athlete { Initials = "Роман Петрушенко" };
-            var athl6 = new Athlete { Initials = "Андрей Арямнов" };
+            //var athl1 = new Athlete { Initials = "Вадим Махнев", Description = "/Content/Media/Athletes/Вадим Махнев.txt" };
+            //var athl2 = new Athlete { Initials = "Александр Романьков" };
+            //var athl3 = new Athlete { Initials = "Алексей Аблмасов" };
+            //var athl4 = new Athlete { Initials = "Артур Литвинчук" };
+            //var athl5 = new Athlete { Initials = "Роман Петрушенко" };
+            //var athl6 = new Athlete { Initials = "Андрей Арямнов" };
 
             var evc1 = new EventCategory { Name = "Летние Олимпийские игры" };
             var evc2 = new EventCategory { Name = "Зимние Олимпийские игры" };
-            var evc3 = new EventCategory { Name = "Мероприятия и соревнования" };
+            //var evc3 = new EventCategory { Name = "Мероприятия и соревнования" };
             
             var ev2 = new Event { Name = "Лондон 2012", Category = evc1 };
-            var ev1 = (new Event { Name = "Пекин 2008", Category = evc1 });
+            var ev1 = (new Event { Name = "Пекин 2008", Category = evc1/*, Athletes = new List<Athlete> {athl1,athl2 }*/ });
             var ev3 = (new Event { Name = "Атланта 1996", Category = evc1 });
             var ev4 = (new Event { Name = "Сидней 2000", Category = evc1 });
             var ev5 = (new Event { Name = "Афины 2004", Category = evc1 });
@@ -40,14 +40,14 @@ namespace Infokiosk.Models
             var ev9 = (new Event { Name = "Ванкувер 2010", Category = evc2 });
             var ev10 = (new Event { Name = "Солт-Лейк-сити 2002", Category = evc2});
 
-            var ach1 = new Achievement { Athlete = athl1, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
-            var ach2 = new Achievement { Athlete = athl1, Event = ev1, Prize = pr3, KindOfSport = "Гребля на байдарках и каноэ, байдарка-двойка" };
-            var ach3 = new Achievement { Athlete = athl3, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
-            var ach4 = new Achievement { Athlete = athl4, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
-            var ach5 = new Achievement { Athlete = athl5, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
-            var ach6 = new Achievement { Athlete = athl5, Event = ev1, Prize = pr3, KindOfSport = "Гребля на байдарках и каноэ, байдарка-двойка" };
-            var ach7 = new Achievement { Athlete = athl2, Event = ev1, Prize = pr4 };
-            var ach8 = new Achievement { Athlete = athl6, Event = ev1, Prize = pr1, KindOfSport = "Тяжелая атлетика, до 105 кг" };
+            //var ach1 = new Achievement { Athlete = athl1, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
+            //var ach2 = new Achievement { Athlete = athl1, Event = ev1, Prize = pr3, KindOfSport = "Гребля на байдарках и каноэ, байдарка-двойка" };
+            //var ach3 = new Achievement { Athlete = athl3, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
+            //var ach4 = new Achievement { Athlete = athl4, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
+            //var ach5 = new Achievement { Athlete = athl5, Event = ev1, Prize = pr1, KindOfSport = "Гребля на байдарках и каноэ, байдарка-четверка" };
+            //var ach6 = new Achievement { Athlete = athl5, Event = ev1, Prize = pr3, KindOfSport = "Гребля на байдарках и каноэ, байдарка-двойка" };
+            //var ach7 = new Achievement { Athlete = athl2, Event = ev1, Prize = pr4 };
+            //var ach8 = new Achievement { Athlete = athl6, Event = ev1, Prize = pr1, KindOfSport = "Тяжелая атлетика, до 105 кг" };
 
             var ex1 = new Exhibit { Name = "Комплект спортинвной формы и кубок Д. Домрачевой", Description = "" };
             var ex2 = new Exhibit { Name = "Олимпийская форма игр в Пекине, 2008 г.", Description = "" };
@@ -113,34 +113,34 @@ namespace Infokiosk.Models
             //var sf20 = new SportsFacility { Name = "", Category = , Images = "" };
 
             db.SportsFacilityCategories.AddRange(new List<SportsFacilityCategory> { c1, c2, c3, c4 });
-            db.SportsFacilities.AddRange(new List<SportsFacility> { sf1/*, sf2, sf3*/, sf4, /*sf5,*/ sf6,/* sf7, */sf8/*, sf9*/ });
-            db.EventCategories.AddRange(new List<EventCategory> { evc1, evc2, evc3 });
+            //db.SportsFacilities.AddRange(new List<SportsFacility> { sf1/*, sf2, sf3*/, sf4, /*sf5,*/ sf6,/* sf7, */sf8/*, sf9*/ });
+            db.EventCategories.AddRange(new List<EventCategory> { evc1, evc2/*, evc3*/ });
             db.Prizes.AddRange(new List<Prize> { pr1, pr2, pr3, pr4 });
-            db.Athletes.AddRange(new List<Athlete> { athl1, athl2, athl3, athl4, athl5, athl6 });
-            db.Events.AddRange(new List<Event> { ev1, ev2, ev3, ev4, ev5, ev6, ev7, ev8, ev9, ev10 });
-            db.Achievements.AddRange(new List<Achievement> { ach1, ach2, ach3, ach4, ach5, ach6, ach7, ach8 });
-            db.Exhibits.AddRange(new List<Exhibit>
-            {
-                ex1,
-                ex2,
-                ex3,
-                //ex4,
-                //ex5,
-                //ex6,
-                //ex7,
-                //ex8,
-                //ex9,
-                ex10,
-                ex11,
-                ex12,
-                ex13
-                //ex14,
-                //ex15,
-                //ex16,
-                //ex17,
-                //ex18,
-                //ex19
-            });
+            //db.Athletes.AddRange(new List<Athlete> { athl1, athl2, athl3, athl4, athl5, athl6 });
+            //db.Events.AddRange(new List<Event> { ev1, ev2, ev3, ev4, ev5, ev6, ev7, ev8, ev9, ev10 });
+            //db.Achievements.AddRange(new List<Achievement> { ach1, ach2, ach3, ach4, ach5, ach6, ach7, ach8 });
+            //db.Exhibits.AddRange(new List<Exhibit>
+            //{
+            //    ex1,
+            //    ex2,
+            //    ex3,
+            //    //ex4,
+            //    //ex5,
+            //    //ex6,
+            //    //ex7,
+            //    //ex8,
+            //    //ex9,
+            //    ex10,
+            //    ex11,
+            //    ex12,
+            //    ex13
+            //    //ex14,
+            //    //ex15,
+            //    //ex16,
+            //    //ex17,
+            //    //ex18,
+            //    //ex19
+            //});
             db.KindsOfSports.AddRange(new List<KindOfSport> {
                 ks1, ks2, ks3, ks4, ks5, ks6, ks7, ks8, ks9, ks10, ks11, ks12, ks13, ks14
             });

@@ -64,6 +64,8 @@ namespace Infokiosk.Controllers
             try
             {
                 var x = db.Events.Find(id);
+                var img = db.Images.Where(i => i.Event.Id == id);
+                db.Images.RemoveRange(img);
                 db.Events.Remove(x);
                 db.SaveChanges();
             }
@@ -196,6 +198,8 @@ namespace Infokiosk.Controllers
             try
             {
                 var x = db.Exhibits.Find(id);
+                var img = db.Images.Where(i => i.Exhibit.Id == id);
+                db.Images.RemoveRange(img);
                 db.Exhibits.Remove(x);
                 db.SaveChanges();
             }
@@ -296,6 +300,8 @@ namespace Infokiosk.Controllers
             try
             {
                 var x = db.Athletes.Find(id);
+                var img = db.Images.Where(i => i.Athlete.Id == id);
+                db.Images.RemoveRange(img);
                 db.Athletes.Remove(x);
                 db.SaveChanges();
             }
@@ -313,7 +319,7 @@ namespace Infokiosk.Controllers
             try
             {
                 var x = db.Athletes.First(y => y.Id == id);
-                if (initials != null) x.Initials = initials;
+                if (initials != "") x.Initials = initials;
                 if (description != null)
                 {
                     string fn = description.FileName;
@@ -371,11 +377,28 @@ namespace Infokiosk.Controllers
 
         //Добавление достижения
         [HttpPost]
-        public ActionResult AddAchievement( int athleteId, int eventId, string kindOfSport, int prizeId)
+        public ActionResult AddAchievement(int athleteId, int eventId, string kindOfSport, int prizeId)
         {
             try
             {
-                db.Achievements.Add(new Achievement { AthleteId = athleteId, EventId = eventId, KindOfSport = kindOfSport, PrizeId = prizeId});
+                var ev = db.Events.First(x => x.Id == eventId);
+                var athl = db.Athletes.Where(c => c.Id == athleteId).SingleOrDefault();
+
+                if (athl != null && ev != null)
+                {
+                    var ea = db.EventAthletes.Where(c => c.AthleteId == athleteId && c.EventId == eventId).SingleOrDefault();
+                    if (ea == null)
+                    {
+                        var eventAthletes = new EventAthletes
+                        {
+                            Event = ev,
+                            Athlete = athl
+                        };
+                        db.EventAthletes.Add(eventAthletes);
+                        db.SaveChanges();
+                    }
+                }
+                db.Achievements.Add(new Achievement { AthleteId = athleteId, EventId = eventId, KindOfSport = kindOfSport, PrizeId = prizeId });
                 db.SaveChanges();
             }
             catch (Exception)
@@ -391,10 +414,23 @@ namespace Infokiosk.Controllers
         {
             try
             {
-                var x = db.Achievements.Find(id);
-                db.Achievements.Remove(x);
+                var a = db.Achievements.Find(id);
+                var count = db.Achievements.Count(x => x.AthleteId == a.AthleteId && x.EventId == a.EventId);
+                if (count == 1)
+                {
+                    var eventAthlete = db.EventAthletes
+                        .Where(mc => mc.Event.Id == a.EventId && mc.Athlete.Id == a.AthleteId)
+                        .SingleOrDefault();
+                    if (eventAthlete != null)
+                    {
+                        db.EventAthletes.Remove(eventAthlete);
+                        db.SaveChanges();
+                    }
+                }
+                db.Achievements.Remove(a);
                 db.SaveChanges();
             }
+
             catch (Exception)
             {
                 return View("Fail");
@@ -448,6 +484,8 @@ namespace Infokiosk.Controllers
             try
             {
                 var x = db.SportsFacilities.Find(id);
+                var img = db.Images.Where(i => i.SportsFacility.Id == id);
+                db.Images.RemoveRange(img);
                 db.SportsFacilities.Remove(x);
                 db.SaveChanges();
             }
@@ -546,6 +584,8 @@ namespace Infokiosk.Controllers
             try
             {
                 var x = db.KindsOfSports.Find(id);
+                var img = db.Images.Where(i => i.KindOfSport.Id == id);
+                db.Images.RemoveRange(img);
                 db.KindsOfSports.Remove(x);
                 db.SaveChanges();
             }
@@ -602,5 +642,11 @@ namespace Infokiosk.Controllers
         }
 
         #endregion
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@model Infokiosk.Models.EventViewModel
+@*@model Infokiosk.Models.Event*@
 
 @{
     ViewBag.Title = "Home Page";
@@ -39,11 +40,11 @@
 <div class="col-sm-6">
     <h2 class="text-center">Призеры</h2>
     <div class=" row">
-        @foreach (var athlete in Model)
+        @foreach (var athlete in Model.Athletes)
             {
             <div class="col-lg-4 col-md-6 ">
                 <a href="/Home/AthleteDescription/@athlete.Id">
-                    <div class="thumbnail item-card" style="height:320px">
+                    <div class="thumbnail item-card" style="height:430px">
                         @{ 
                         try { path = athlete.Images.First().Filename; }
                         catch (Exception) { path = @"/Content/Media/1.jpg"; }

@@ -21,7 +21,7 @@ namespace Infokiosk.Controllers
         //Отображение страницы "Олимпийские достижения"
         public ActionResult OlympicGames()
         {
-            var games = db.Events.Where(x => x.Category.Name.Contains("Олимпийские игры")).Include(x => x.Achievements).Include(x => x.Category).Include(x => x.Images).OrderBy(x => x.Name).ToList();
+            var games = db.Events.Where(x => x.Category.Name.Contains("Олимпийские игры")).Include(x => x.Category).Include(x => x.Images).OrderBy(x => x.Name).ToList();
             return View(games);
         }
 
@@ -34,7 +34,7 @@ namespace Infokiosk.Controllers
         //Отображение страница "Экспонаты"
         public ActionResult Exhibits()
         {
-            var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category == null).ToList();
+            var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category != "Медаль Олимпийских игр").ToList();
             return View(exhibits);
         }
 
@@ -56,17 +56,22 @@ namespace Infokiosk.Controllers
         //Отображение страницы с описанием спортивного события
         public ActionResult EventDescription(int id)
         {
-            var model = new EventViewModel
-            {
-                Event = db.Events.FirstOrDefault(x => x.Id == id),
-                Achievements = db.Achievements.Where(x => x.EventId == id)
+            var ev = db.Events.FirstOrDefault(x => x.Id == id);
+            var ach = db.Achievements.Where(x => x.EventId == id)
                      .Include(x => x.Athlete)
                      .Include(x => x.Event)
-                     .Include(x => x.Prize).ToList(),
-                Athletes = db.Athletes.Include(x => x.Images).OrderBy(x => x.Initials).Where(x => x.Achievements.FirstOrDefault().EventId == id).ToList()
-
+                     .Include(x => x.Prize).ToList();
+            var AthletesOfEvents = db.Events
+            .SelectMany(m => m.EventAthletes.Select(mc => mc.Athlete)).Include(x=>x.Images)
+            .ToList();
+            var model = new EventViewModel
+            {
+                Event = ev,
+                Achievements = ach,
+                Athletes = AthletesOfEvents
             };
-            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(model.Event.Description));
+
+            ViewData["Description"] = Markdown.ToHtml(this.GetDescription(ev.Description));
             return View(model);
         }
 
@@ -80,7 +85,7 @@ namespace Infokiosk.Controllers
         //Отображение страницы с описанием вида спорта
         public ActionResult KindOfSportDescription(int id)
         {
-            var kindOfSport = db.KindsOfSports.FirstOrDefault(x => x.Id == id);
+            var kindOfSport = db.KindsOfSports.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
             ViewData["Description"] = Markdown.ToHtml(this.GetDescription(kindOfSport.Description));
             return View(kindOfSport);
         }
@@ -122,6 +127,12 @@ namespace Infokiosk.Controllers
                 return "Возникла ошибка при загрузке файла. Проверьте наличие файла";
             }
 
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

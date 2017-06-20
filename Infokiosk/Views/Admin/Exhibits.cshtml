@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="category" class="col-xs-4 control-label">Категория экспоната:</label>
             <select class="selectpicker form-control col-xs-8" name="category">
-                <option value="">Обычный экспонат</option>
+                <option value="Обычный экспонат">Обычный экспонат</option>
                 <option value="Медаль Олимпийских игр">Медаль Олимпийских игр</option>
             </select>
         </div>
@@ -78,7 +78,7 @@
             <label for="id" class="col-xs-4 control-label">Экспонат:</label>
             <select class="selectpicker form-control" name="id">
                 <option value="">Выберите экспонат</option>
-                @foreach (var x in @Model)
+                @foreach (var x in Model)
             {
                     <option value="@x.Id">@x.Name</option>
                 }
@@ -99,7 +99,7 @@
             <label for="id" class="col-xs-4 control-label">Экспонат:</label>
             <select class="selectpicker form-control" name="id">
                 <option value="">Выберите экспонат</option>
-                @foreach (var x in @Model)
+                @foreach (var x in Model)
             {
                     <option value="@x.Id">@x.Name</option>
                 }

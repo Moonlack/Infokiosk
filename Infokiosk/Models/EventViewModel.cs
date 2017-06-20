@@ -10,5 +10,5 @@ namespace Infokiosk.Models
         public Event Event { get; set; }
         public List<Achievement> Achievements { get; set; }
         public List<Athlete> Athletes { get; set; }
-        }
+    }
 }

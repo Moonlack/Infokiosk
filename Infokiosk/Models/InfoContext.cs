@@ -8,8 +8,10 @@ namespace Infokiosk.Models
 {
     public class InfoContext : DbContext
     {
-        //public BookContext(): base("DefaultConnection")
-        //{ }
+
+        public InfoContext() : base("Infokiosk")
+        { }
+
         public DbSet<Achievement> Achievements { get; set; }
         public DbSet<Athlete> Athletes { get; set; }
 
@@ -24,7 +26,10 @@ namespace Infokiosk.Models
 
         public DbSet<SportsFacility> SportsFacilities { get; set; }
         public DbSet<SportsFacilityCategory> SportsFacilityCategories { get; set; }
-
+        
         public DbSet<Image> Images { get; set; }
+        public DbSet<EventAthletes> EventAthletes { get; set; }
+
     }
+
 }
