@@ -6,11 +6,12 @@ using System.Web;
 
 namespace Infokiosk.Models
 {
+    [PetaPoco.TableName("Events")]
+    [PetaPoco.PrimaryKey("EventId")]
     public class Event
     {
-        public int Id { get; set; }
-        public EventCategory Category { get; set; }
-        public int CategoryId { get; set; }
+        public long EventId { get; set; }
+        public long EventCategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

@@ -5,15 +5,17 @@ using System.Web;
 
 namespace Infokiosk.Models
 {
+    [PetaPoco.TableName("Images")]
+    [PetaPoco.PrimaryKey("ImageId")]
     public class Image
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Filename { get; set; }
 
-        public Athlete  Athlete { get; set; }
-        public Exhibit Exhibit { get; set; }
-        public Event Event { get; set; }
-        public KindOfSport KindOfSport { get; set; }
-        public SportsFacility SportsFacility { get; set; }
+        public long  AthleteId { get; set; }
+        public long ExhibitId { get; set; }
+        public long EventId { get; set; }
+        public long KindOfSportId { get; set; }
+        public long SportsFacilityId { get; set; }
     }
 }
