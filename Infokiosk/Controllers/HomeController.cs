@@ -5,13 +5,13 @@ using System.Web.Mvc;
 using Infokiosk.Models;
 using Markdig;
 using PetaPoco;
+using System.Collections.Generic;
 
 namespace Infokiosk.Controllers
 {
     public class HomeController : Controller
     {
-        public Database db = new Database("Infokiosk");
-
+        Database db = new Database("PetaInfokiosk");
         //Отображение главной страницы пользователя
         public ActionResult Index()
         {
@@ -21,6 +21,7 @@ namespace Infokiosk.Controllers
         //Отображение страницы "Олимпийские достижения"
         public ActionResult OlympicGames()
         {
+
             //var games = db.Events.Where(x => x.Category.Name.Contains("Олимпийские игры")).Include(x => x.Category).Include(x => x.Images).OrderBy(x => x.Name).ToList();
             //return View(games);
             return View();
@@ -35,9 +36,17 @@ namespace Infokiosk.Controllers
         //Отображение страница "Экспонаты"
         public ActionResult Exhibits()
         {
+
+
+            //var model = db.Query<Exhibit>("WHERE Exhibit.Category='Медаль Олимпийских игр' ORDER BY Exhibit.Name ASC");
+
             //var exhibits = db.Exhibits.Include(x => x.Images).OrderBy(x => x.Name).Where(x => x.Category != "Медаль Олимпийских игр").ToList();
             //return View(exhibits);
-            return View();
+            var exhibits = db.Fetch<Exhibit, Image, Exhibit>(
+               new ExhibitsRelator().MapIt,
+               "SELECT * FROM Exhibits LEFT JOIN Images ON Images.ExhibitId = Exhibits.exhibitId ORDER BY exhibits.name"
+               );
+            return View(exhibits);
         }
 
         //Отображение страницы с описанием экспоната
@@ -46,7 +55,15 @@ namespace Infokiosk.Controllers
             //var exhibit = db.Exhibits.Include(x => x.Images).FirstOrDefault(x => x.Id == id);
             //ViewData["Description"] = Markdown.ToHtml(this.GetDescription(exhibit.Description));
             //return View(exhibit);
-            return View();
+            var exhibit = db.Fetch<Exhibit, Image, Exhibit>(
+               new ExhibitsRelator().MapIt,
+               Sql.Builder
+               .Append("SELECT * FROM Exhibits")
+               .Append("LEFT JOIN Images ON Images.ExhibitId = Exhibits.exhibitId")
+               .Append(@"WHERE exhibits.exhibitid=@0", id)
+               .Append("ORDER BY exhibits.name")
+                );
+            return View(exhibit.Single());
         }
 
         //Отображение страницы с медалями Олимпийских игр
@@ -84,9 +101,9 @@ namespace Infokiosk.Controllers
         //Отображение страницы с видами спорта
         public ActionResult KindsOfSports()
         {
-            var kindOfSports = db.Query<KindOfSport>("SELECT * FROM KindOfSports ORDER BY Name ASC");
+            //var kindOfSports = db.Query<KindOfSport>("SELECT * FROM KindOfSports ORDER BY Name ASC");
             //var kindOfSports = db.KindsOfSports.OrderBy(x => x.Name).ToList();
-            return View(kindOfSports);
+            return View();
         }
 
         //Отображение страницы с описанием вида спорта
@@ -101,9 +118,9 @@ namespace Infokiosk.Controllers
         //Отображение страница со спортивными объектами
         public ActionResult SportsFacilities()
         {
-            var model = db.Query<SportsFacility>("SELECT * FROM SportsFacilities");
+            //var model = db.Query<SportsFacility>("SELECT * FROM SportsFacilities");
             //var model = db.SportsFacilities.OrderBy(x => x.Name).Include(x => x.Images).Include(x => x.Category).ToList();
-            return View(model);
+            return View();
         }
 
         //Отображение страницы с описанием спортивного объекта
@@ -139,6 +156,7 @@ namespace Infokiosk.Controllers
             }
 
         }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PetaPoco;
 
 namespace Infokiosk.Models
 {
+    [TableName("SportsFacilities")]
+    [PrimaryKey("SportsFacilityId")]
     public class SportsFacility
     {
-        public int Id { get; set; }
+        [Column] public long SportsFacilityId { get; set; }
         public SportsFacilityCategory Category  { get; set; }
-        public int CategoryId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [Column] public int CategoryId { get; set; }
+        [Column] public string Name { get; set; }
+        [Column] public string Description { get; set; }
         public List<Image> Images { get; set; }
     }
 }

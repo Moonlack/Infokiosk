@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PetaPoco;
 
 namespace Infokiosk.Models
 {
-    [PetaPoco.TableName("KindsOfSports")]
-    [PetaPoco.PrimaryKey("KindOfSportId")]
+    [TableName("KindsOfSports")]
+    [PrimaryKey("KindOfSportId")]
+    [ExplicitColumns]
     public class KindOfSport
     {
-        public long KindOfSportId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [Column] public long KindOfSportId { get; set; }
+        [Column] public string Name { get; set; }
+        [Column] public string Description { get; set; }
         public List<Image> Images { get; set; }
     }
 }

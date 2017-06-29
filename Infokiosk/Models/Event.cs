@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Web;
+using PetaPoco;
 
 namespace Infokiosk.Models
 {
-    [PetaPoco.TableName("Events")]
-    [PetaPoco.PrimaryKey("EventId")]
+    [TableName("Events")]
+    [PrimaryKey("EventId")]
     public class Event
     {
-        public long EventId { get; set; }
-        public long EventCategoryId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        [Column] public long EventId { get; set; }
+        [Column] public long EventCategoryId { get; set; }
+        [Column] public string Name { get; set; }
+        [Column] public string Description { get; set; }
 
         public List<Image> Images { get; set; }
 

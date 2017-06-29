@@ -1,4 +1,4 @@
-﻿@model List<Infokiosk.Models.Exhibit>
+﻿@model IEnumerable<Infokiosk.Models.Exhibit>
 @{ string path = "";}
 
 <div class="row">
@@ -18,9 +18,9 @@
     {
         <div class="col-sm-3">
             <div class="thumbnail item-card"  style="height:480px">
-                    @try { path = exh.Images.First().Filename; }
+                    @try { path = exh.Images[0].Filename; }
                 catch (Exception) { path = @"/Content/Media/1.jpg"; }
-                    <a href="/Home/ExhibitDescription/@exh.Id">
+                    <a href="/Home/ExhibitDescription/@exh.ExhibitId">
                         <img src="@path" alt="...">
                         <div class="caption">
 

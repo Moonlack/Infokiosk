@@ -11,7 +11,7 @@ namespace Infokiosk.Controllers
 {
     public class AdminController : Controller
     {
-        public Database db = new Database("Infokiosk");
+        public Database db = new Database("PetaInfokiosk");
 
         //Отображение страница для администрирования экспонатов
         //public ActionResult Index()

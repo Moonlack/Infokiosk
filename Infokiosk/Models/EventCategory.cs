@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PetaPoco;
 
 namespace Infokiosk.Models
 {
-    [PetaPoco.TableName("EventCategories")]
-    [PetaPoco.PrimaryKey("EventCategoryId")]
+    [TableName("EventCategories")]
+    [PrimaryKey("EventCategoryId")]
     public class EventCategory
     {
         public long EventCategoryId { get; set; }
